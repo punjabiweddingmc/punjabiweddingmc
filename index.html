@@ -1,112 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Punjabi Wedding MC</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #fce680;
-            margin: 0;
-            text-align: center;
-        }
-        header {
-            background-color: maroon;
-            padding: 15px 0;
-        }
-        nav a {
-            background-color: maroon;
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            margin: 0 5px;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-        nav a:hover {
-            background-color: #a00000;
-        }
-        .logo {
-            margin: 20px auto;
-            max-width: 300px;
-        }
-        h1 {
-            color: black;
-            margin-top: 10px;
-        }
-        .btn {
-            background-color: maroon;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 16px;
-            display: inline-block;
-            margin: 20px 0;
-        }
-        .btn:hover {
-            background-color: #a00000;
-        }
-        .profile {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            display: flex;
-            align-items: center;
-            background: white;
-            border-radius: 10px;
-            padding: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
-        }
-        .profile img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            margin-right: 10px;
-            border: 2px solid maroon;
-        }
-        .profile h3 {
-            margin: 0;
-            font-size: 16px;
-        }
-        .profile p {
-            margin: 0;
-            font-size: 12px;
-            color: gray;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Punjabi Wedding MC</title>
+  <style>
+    :root{
+      --bg: #f6d966;        /* richer yellow */
+      --maroon:#800000;
+      --maroon-dark:#a00000;
+      --text:black;
+    }
+    html{scroll-behavior:smooth;}
+    body{
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin:0;
+    }
+    /* Nav */
+    header{background:var(--maroon); position:sticky; top:0; z-index:100;}
+    nav{
+      display:flex; justify-content:space-around; align-items:center;
+      gap:10px; padding:12px 10px; flex-wrap:nowrap;
+    }
+    nav a{
+      color:#fff; text-decoration:none; font-weight:700;
+      padding:10px 18px; border-radius:8px; background:var(--maroon);
+      border:1px solid rgba(255,255,255,0.15);
+    }
+    nav a:hover{ background:var(--maroon-dark); }
+
+    /* Hero / shared section styles */
+    .wrap{ max-width:960px; margin:0 auto; padding:24px 18px; text-align:center; }
+    .logo{ max-width:320px; width:90%; height:auto; margin:22px auto; display:block; }
+
+    h1{ font-size:36px; line-height:1.15; margin:10px 0 6px; }
+    .btn{
+      display:inline-block; margin-top:18px; padding:12px 26px;
+      color:#fff; background:var(--maroon); border-radius:8px;
+      text-decoration:none; font-weight:700;
+    }
+    .btn:hover{ background:var(--maroon-dark); }
+
+    section{ padding:40px 0; }
+    section h2{ margin:0 0 14px; font-size:28px; }
+    section p{ font-size:16px; margin:0 auto 14px; max-width:720px; }
+
+    /* Gallery */
+    .gallery{
+      display:grid; gap:12px; grid-template-columns:repeat(2,1fr);
+      max-width:900px; margin:18px auto 0; padding:0 12px;
+    }
+    .ph{
+      background:#fff; border-radius:10px; padding:40px 10px; 
+      box-shadow:0 2px 8px rgba(0,0,0,.08);
+      font-weight:600;
+    }
+
+    /* Services */
+    .cards{
+      display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      max-width:960px; margin:12px auto 0; padding:0 12px;
+    }
+    .card{
+      background:#fff; border-radius:12px; padding:16px;
+      box-shadow:0 2px 10px rgba(0,0,0,.08); text-align:left;
+    }
+    .card h3{ margin:0 0 8px; color:var(--maroon); }
+    .card p{ margin:0; color:#333; }
+
+    /* Pricing note */
+    .note{
+      background:#fff; border-left:6px solid var(--maroon);
+      margin:14px auto; max-width:820px; padding:16px; border-radius:10px;
+      text-align:left;
+    }
+
+    /* Contact */
+    .contact{
+      background:#fff; max-width:680px; margin:0 auto; padding:18px;
+      border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,.08);
+    }
+
+    /* Founder badge bottom-left */
+    .profile{
+      position:fixed; bottom:20px; left:20px;
+      display:flex; align-items:center; gap:10px;
+      background:#fff; padding:10px 12px; border-radius:12px;
+      box-shadow:0 4px 16px rgba(0,0,0,.15);
+    }
+    .profile img{
+      width:64px; height:64px; border-radius:50%; object-fit:cover;
+      border:2px solid var(--maroon);
+    }
+    .profile .name{ font-weight:800; margin:0; }
+    .profile .title{ margin:2px 0 0; color:#666; font-size:13px; }
+
+    /* Responsive tweaks */
+    @media (max-width:560px){
+      h1{ font-size:30px; }
+      nav a{ padding:8px 12px; }
+      .profile{ left:12px; right:12px; }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Navigation -->
-    <header>
-        <nav>
-            <a href="#">Home</a>
-            <a href="#">Services</a>
-            <a href="#">Pricing</a>
-            <a href="#">Contact Us</a>
-        </nav>
-    </header>
+  <!-- NAV -->
+  <header>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact Us</a>
+    </nav>
+  </header>
 
-    <!-- Logo -->
-    <img src="Logo.png" alt="Punjabi Wedding MC Logo" class="logo">
+  <!-- HERO -->
+  <div id="home" class="wrap">
+    <img src="Logo.png" alt="Punjabi Wedding MC Logo" class="logo" />
+    <h1>Welcome to<br/>Punjabi Wedding MC</h1>
+  </div>
 
-    <!-- Main Heading -->
-    <h1>Welcome to Punjabi Wedding MC</h1>
-
-    <!-- Book Now Button -->
-    <a class="btn" href="mailto:punjabiweddingmc@gmail.com">Book Now</a>
-
-    <!-- Profile Section -->
-    <div class="profile">
-        <img src="profile.jpg" alt="Arrjun Singh">
-        <div>
-            <h3>ARRJUN SINGH</h3>
-            <p>CEO, Founder</p>
-        </div>
+  <!-- GALLERY (Home scroll target) -->
+  <section aria-labelledby="gallery-title">
+    <div class="wrap">
+      <h2 id="gallery-title">Gallery</h2>
+      <p>Highlights from receptions, baraats, and sangeets. (Replace placeholders with your images later.)</p>
+      <div class="gallery">
+        <div class="ph">Add Photo 1</div>
+        <div class="ph">Add Photo 2</div>
+        <div class="ph">Add Photo 3</div>
+        <div class="ph">Add Photo 4</div>
+      </div>
     </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" aria-labelledby="services-title">
+    <div class="wrap">
+      <h2 id="services-title">Services</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>MC / Host</h3>
+          <p>High-energy hosting, crowd engagement, bilingual announcements, and seamless flow for your event.</p>
+        </div>
+        <div class="card">
+          <h3>Dhol &amp; Drums</h3>
+          <p>Traditional dhol with modern rhythms to supercharge baraats, entrances, and dance floors.</p>
+        </div>
+        <div class="card">
+          <h3>Content Creation</h3>
+          <p>Reels, highlights, and social-ready clips of your celebration — captured and edited for shareability.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" aria-labelledby="pricing-title">
+    <div class="wrap">
+      <h2 id="pricing-title">Pricing</h2>
+      <div class="note">
+        We cater to you according to your needs, making sure you are satisfied.  
+        Please email us your <strong>dates</strong>, <strong>location</strong>, <strong>timing</strong>, and which <strong>services</strong> you need.  
+        We will get back to you within <strong>48 hours</strong>.
+      </div>
+      <a class="btn" href="mailto:Punjabiweddingmc@gmail.com?subject=Booking%20Inquiry%20-%20Punjabi%20Wedding%20MC">
+        Book Now
+      </a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" aria-labelledby="contact-title">
+    <div class="wrap">
+      <h2 id="contact-title">Contact Us</h2>
+      <div class="contact">
+        <p><strong>Email:</strong> Punjabiweddingmc@gmail.com</p>
+        <p><strong>Instagram:</strong> @punjabiweddingmc</p>
+        <p><strong>Phone:</strong> 440-266-5763</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Founder badge -->
+  <div class="profile">
+    <img src="founder.jpg" alt="Arrjun Singh" />
+    <div>
+      <p class="name">ARRJUN SINGH</p>
+      <p class="title">CEO, Founder</p>
+    </div>
+  </div>
 
 </body>
 </html>
