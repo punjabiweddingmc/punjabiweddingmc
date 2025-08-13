@@ -1,227 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Punjabi Wedding MC</title>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Satisfy&family=Oswald:wght@500;700&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet"/>
-
-  <style>
-    :root{
-      --bg:#d4a017;              /* mustard yellow */
-      --maroon:#800000;
-      --maroon-dark:#a00000;
-      --ink:#000;
-      --card:#ffffff;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Punjabi Wedding MC</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Garamond&family=Oswald:wght@500&family=Satisfy&display=swap" rel="stylesheet">
+<style>
+    body {
+        margin: 0;
+        font-family: 'Garamond', serif;
+        background-color: #FFD300; /* Bright warm yellow */
     }
-    html{scroll-behavior:smooth;}
-    body{
-      margin:0;
-      background:var(--bg);
-      color:var(--ink);
-      font-family:"EB Garamond", Garamond, "Times New Roman", serif;
+    header {
+        background-color: maroon;
+        padding: 10px 0;
     }
-
-    /* NAV + DROPDOWNS */
-    header{position:sticky; top:0; z-index:1000; background:var(--maroon);}
-    .nav{max-width:1100px; margin:0 auto; padding:10px 12px;}
-    .nav ul{list-style:none; margin:0; padding:0; display:flex; justify-content:space-around; gap:12px;}
-    .nav li{position:relative}
-    .nav > ul > li > a{
-      font-family:"Oswald", sans-serif;
-      display:inline-block; padding:10px 18px; border-radius:8px;
-      color:#fff; text-decoration:none; font-weight:700;
-      background:var(--maroon); border:1px solid rgba(255,255,255,.15);
+    nav {
+        display: flex;
+        justify-content: center;
     }
-    .nav > ul > li > a:hover{background:var(--maroon-dark);}
-    .dropdown{
-      position:absolute; left:0; top:100%; min-width:220px;
-      background:var(--card); border-radius:10px; box-shadow:0 8px 20px rgba(0,0,0,.15);
-      padding:8px; display:none;
+    nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
     }
-    .dropdown a{
-      display:block; padding:10px 12px; border-radius:8px;
-      color:var(--maroon); text-decoration:none; font-weight:600;
-      font-family:"EB Garamond", Garamond, serif;
+    nav ul li {
+        position: relative;
     }
-    .dropdown a:hover{background:#f3f3f3;}
-    /* show on hover (desktop) or focus-within (mobile tap) */
-    .nav li:hover .dropdown, .nav li:focus-within .dropdown{display:block;}
-
-    /* LAYOUT / SECTIONS */
-    .wrap{max-width:1000px; margin:0 auto; padding:24px 18px; text-align:center;}
-    .logo{max-width:320px; width:90%; height:auto; margin:22px auto; display:block;}
-
-    h1{margin:10px 0 6px; line-height:1.15; font-size:36px; font-family:"Raleway", sans-serif;}
-    h1 .brand{display:block; margin-top:6px; font-size:42px; font-family:"Satisfy", cursive;}
-    h2{font-size:28px; margin:0 0 14px; font-family:"Oswald", sans-serif;}
-
-    section{padding:40px 0;}
-    section p{max-width:760px; margin:0 auto 14px;}
-
-    .gallery{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); max-width:960px; margin:18px auto 0; padding:0 12px;}
-    .ph{background:var(--card); border-radius:10px; padding:40px 10px; box-shadow:0 2px 8px rgba(0,0,0,.08); font-weight:600;}
-
-    .cards{display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); max-width:960px; margin:12px auto 0; padding:0 12px;}
-    .card{background:var(--card); border-radius:12px; padding:16px; text-align:left; box-shadow:0 2px 10px rgba(0,0,0,.08);}
-    .card h3{margin:0 0 8px; color:var(--maroon); font-family:"Oswald", sans-serif;}
-    .card p{margin:0;}
-
-    .note{background:var(--card); border-left:6px solid var(--maroon); margin:14px auto; max-width:820px; padding:16px; border-radius:10px; text-align:left;}
-
-    .btn{
-      display:inline-block; margin-top:16px; padding:12px 26px;
-      color:#fff; background:var(--maroon); border-radius:8px;
-      text-decoration:none; font-weight:700; font-family:"Oswald", sans-serif;
+    nav ul li a {
+        display: block;
+        padding: 10px 20px;
+        color: white;
+        text-decoration: none;
+        font-family: 'Oswald', sans-serif;
     }
-    .btn:hover{background:var(--maroon-dark);}
-
-    .contact{background:var(--card); max-width:680px; margin:0 auto; padding:18px; border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,.08);}
-
-    /* Founder badge */
-    .profile{
-      position:fixed; bottom:20px; left:20px; display:flex; align-items:center; gap:10px;
-      background:#fff; padding:10px 12px; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,.15);
+    nav ul li:hover {
+        background-color: #990000;
     }
-    .profile img{width:64px; height:64px; border-radius:50%; object-fit:cover; border:2px solid var(--maroon);}
-    .profile .name{margin:0; font-weight:800;}
-    .profile .title{margin:2px 0 0; color:#666; font-size:13px;}
-
-    @media (max-width:560px){
-      h1{font-size:30px;}
-      h1 .brand{font-size:36px;}
-      .nav > ul > li > a{padding:9px 12px;}
-      .dropdown{min-width:180px;}
-      .profile{left:12px; right:12px;}
+    nav ul li ul {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: maroon;
+        min-width: 150px;
+        z-index: 1000;
     }
-  </style>
+    nav ul li:hover ul {
+        display: block;
+    }
+    nav ul li ul li a {
+        padding: 10px;
+    }
+    .container {
+        text-align: center;
+        padding: 20px;
+    }
+    .logo {
+        max-width: 300px;
+        margin-bottom: 20px;
+    }
+    h1 {
+        font-family: 'Raleway', sans-serif;
+        font-size: 2em;
+        margin-bottom: 5px;
+    }
+    h2 {
+        font-family: 'Satisfy', cursive;
+        font-size: 3em;
+        margin-top: 0;
+    }
+    .book-btn {
+        background-color: maroon;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        font-size: 1.2em;
+        cursor: pointer;
+        margin-top: 20px;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .founder-card {
+        display: flex;
+        align-items: center;
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        background-color: white;
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .founder-card img {
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        margin-right: 10px;
+    }
+    .founder-text {
+        font-family: 'Garamond', serif;
+    }
+</style>
 </head>
 <body>
 
-  <!-- NAV with dropdowns -->
-  <header>
-    <nav class="nav">
-      <ul>
-        <li tabindex="0">
-          <a href="#home">Home</a>
-          <div class="dropdown">
-            <a href="#photos">Photos</a>
-            <a href="#videos">Videos</a>
-          </div>
-        </li>
-        <li tabindex="0">
-          <a href="#services">Services</a>
-          <div class="dropdown">
-            <a href="#svc-mc">MC / Host</a>
-            <a href="#svc-dhol">Dhol &amp; Drums</a>
-            <a href="#svc-content">Content Creation</a>
-          </div>
-        </li>
-        <li tabindex="0">
-          <a href="#pricing">Pricing</a>
-          <div class="dropdown">
-            <a href="#pricing">Packages / Note</a>
-            <a href="mailto:Punjabiweddingmc@gmail.com?subject=Booking%20Inquiry%20-%20Punjabi%20Wedding%20MC">Book Now</a>
-          </div>
-        </li>
-        <li tabindex="0">
-          <a href="#contact">Contact Us</a>
-          <div class="dropdown">
-            <a href="mailto:Punjabiweddingmc@gmail.com">Email</a>
-            <a href="tel:+14402665763">Phone</a>
-            <a href="https://instagram.com/punjabiweddingmc" target="_blank" rel="noopener">Instagram</a>
-          </div>
-        </li>
-      </ul>
+<header>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a>
+                <ul>
+                    <li><a href="#photos">Photos</a></li>
+                    <li><a href="#videos">Videos</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Services</a>
+                <ul>
+                    <li><a href="#mc">MC/Host</a></li>
+                    <li><a href="#dhol">Dhol & Drums</a></li>
+                    <li><a href="#content">Content Creation</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Pricing</a>
+                <ul>
+                    <li><a href="#pricing-info">Pricing Details</a></li>
+                    <li><a href="mailto:punjabiweddingmc@gmail.com">Book Now</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Contact Us</a>
+                <ul>
+                    <li><a href="mailto:punjabiweddingmc@gmail.com">Email</a></li>
+                    <li><a href="tel:4402665763">Call</a></li>
+                </ul>
+            </li>
+        </ul>
     </nav>
-  </header>
+</header>
 
-  <!-- HERO -->
-  <div id="home" class="wrap">
-    <img src="Logo.png" alt="Punjabi Wedding MC Logo" class="logo"/>
-    <h1>Welcome to <span class="brand">Punjabi Wedding MC</span></h1>
-  </div>
+<div class="container">
+    <img src="Logo.png" alt="Punjabi Wedding MC Logo" class="logo">
+    <h1>Welcome to</h1>
+    <h2>Punjabi Wedding MC</h2>
+    <a href="mailto:punjabiweddingmc@gmail.com" class="book-btn">Book Now</a>
+</div>
 
-  <!-- HOME → PHOTOS -->
-  <section id="photos" aria-labelledby="photos-title">
-    <div class="wrap">
-      <h2 id="photos-title">Photos</h2>
-      <div class="gallery">
-        <div class="ph">Add Photo 1</div>
-        <div class="ph">Add Photo 2</div>
-        <div class="ph">Add Photo 3</div>
-        <div class="ph">Add Photo 4</div>
-      </div>
+<div class="founder-card">
+    <img src="founder.jpg" alt="Arrjun Singh">
+    <div class="founder-text">
+        <strong>ARRJUN SINGH</strong><br>
+        CEO, Founder
     </div>
-  </section>
-
-  <!-- HOME → VIDEOS -->
-  <section id="videos" aria-labelledby="videos-title">
-    <div class="wrap">
-      <h2 id="videos-title">Videos</h2>
-      <div class="gallery">
-        <div class="ph">Add Video 1 (thumbnail)</div>
-        <div class="ph">Add Video 2 (thumbnail)</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVICES -->
-  <section id="services" aria-labelledby="services-title">
-    <div class="wrap">
-      <h2 id="services-title">Services</h2>
-      <div class="cards">
-        <div id="svc-mc" class="card">
-          <h3>MC / Host</h3>
-          <p>High-energy hosting, crowd engagement, bilingual announcements, and seamless flow for your event.</p>
-        </div>
-        <div id="svc-dhol" class="card">
-          <h3>Dhol &amp; Drums</h3>
-          <p>Traditional dhol with modern rhythms to power baraats, entrances, and dance floors.</p>
-        </div>
-        <div id="svc-content" class="card">
-          <h3>Content Creation</h3>
-          <p>Reels, highlights, and social-ready clips — captured and edited for shareability.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRICING -->
-  <section id="pricing" aria-labelledby="pricing-title">
-    <div class="wrap">
-      <h2 id="pricing-title">Pricing</h2>
-      <div class="note">
-        We cater to you according to your needs, making sure you are satisfied.
-        Please email us your <strong>dates</strong>, <strong>location</strong>, <strong>timing</strong>, and the <strong>services</strong> you need.
-        We will get back to you within <strong>48 hours</strong>.
-      </div>
-      <a class="btn" href="mailto:Punjabiweddingmc@gmail.com?subject=Booking%20Inquiry%20-%20Punjabi%20Wedding%20MC">Book Now</a>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact" aria-labelledby="contact-title">
-    <div class="wrap">
-      <h2 id="contact-title">Contact Us</h2>
-      <div class="contact">
-        <p><strong>Email:</strong> <a href="mailto:Punjabiweddingmc@gmail.com">Punjabiweddingmc@gmail.com</a></p>
-        <p><strong>Phone:</strong> <a href="tel:+14402665763">440-266-5763</a></p>
-        <p><strong>Instagram:</strong> <a href="https://instagram.com/punjabiweddingmc" target="_blank" rel="noopener">@punjabiweddingmc</a></p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Founder badge -->
-  <div class="profile">
-    <img src="founder.jpg" alt="Arrjun Singh"/>
-    <div>
-      <p class="name">ARRJUN SINGH</p>
-      <p class="title">CEO, Founder</p>
-    </div>
-  </div>
+</div>
 
 </body>
 </html>
