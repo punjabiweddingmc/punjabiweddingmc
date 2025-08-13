@@ -6,98 +6,107 @@
     <title>Punjabi Wedding MC</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            background-color: #ffeb99; /* Richer yellow */
-            color: black;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fce680;
             margin: 0;
-            padding: 0;
             text-align: center;
         }
         header {
-            padding: 20px;
+            background-color: maroon;
+            padding: 15px 0;
         }
-        header img {
-            max-width: 200px;
-            height: auto;
+        nav a {
+            background-color: maroon;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+            border-radius: 5px;
+            font-weight: bold;
         }
-        main {
-            padding: 20px;
+        nav a:hover {
+            background-color: #a00000;
+        }
+        .logo {
+            margin: 20px auto;
+            max-width: 300px;
         }
         h1 {
-            font-size: 2.4em;
+            color: black;
             margin-top: 10px;
-            font-weight: 600;
         }
-        p {
-            font-size: 1.2em;
-            margin-bottom: 20px;
-        }
-        .book-btn {
-            display: inline-block;
-            padding: 12px 25px;
-            font-size: 1em;
-            font-weight: bold;
+        .btn {
+            background-color: maroon;
             color: white;
-            background-color: #800000; /* Maroon button */
+            padding: 10px 20px;
             border: none;
             border-radius: 5px;
             text-decoration: none;
-            transition: background-color 0.3s ease;
+            font-size: 16px;
+            display: inline-block;
+            margin: 20px 0;
         }
-        .book-btn:hover {
+        .btn:hover {
             background-color: #a00000;
         }
-        .founder {
+        .profile {
             position: fixed;
             bottom: 20px;
             left: 20px;
             display: flex;
             align-items: center;
-            background-color: rgba(255, 255, 255, 0.85);
+            background: white;
+            border-radius: 10px;
             padding: 10px;
-            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
         }
-        .founder img {
-            width: 80px;
-            height: 80px;
+        .profile img {
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             margin-right: 10px;
-            object-fit: cover;
-            border: 2px solid #800000;
+            border: 2px solid maroon;
         }
-        .founder-info {
-            text-align: left;
+        .profile h3 {
+            margin: 0;
+            font-size: 16px;
         }
-        .founder-info strong {
-            font-size: 1.1em;
-        }
-        .founder-info span {
-            font-size: 0.9em;
-            display: block;
+        .profile p {
+            margin: 0;
+            font-size: 12px;
+            color: gray;
         }
     </style>
 </head>
 <body>
-    <header>
-        <img src="Logo.png" alt="Punjabi Wedding MC Logo">
-    </header>
-    <main>
-        <h1>Welcome to Punjabi Wedding MC</h1>
-        <p>Your website is now live!</p>
-        <a href="mailto:Punjabiweddingmc@gmail.com" class="book-btn">Book Now</a>
-    </main>
 
-    <!-- Founder Section -->
-    <div class="founder">
-        <img src="founder.jpg" alt="Arrjun Singh">
-        <div class="founder-info">
-            <strong>ARRJUN SINGH</strong>
-            <span>CEO, Founder</span>
+    <!-- Navigation -->
+    <header>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Services</a>
+            <a href="#">Pricing</a>
+            <a href="#">Contact Us</a>
+        </nav>
+    </header>
+
+    <!-- Logo -->
+    <img src="Logo.png" alt="Punjabi Wedding MC Logo" class="logo">
+
+    <!-- Main Heading -->
+    <h1>Welcome to Punjabi Wedding MC</h1>
+
+    <!-- Book Now Button -->
+    <a class="btn" href="mailto:punjabiweddingmc@gmail.com">Book Now</a>
+
+    <!-- Profile Section -->
+    <div class="profile">
+        <img src="profile.jpg" alt="Arrjun Singh">
+        <div>
+            <h3>ARRJUN SINGH</h3>
+            <p>CEO, Founder</p>
         </div>
     </div>
 
-    <!-- Load JavaScript files -->
-    <script src="index.js"></script>
-    <script src="App.js"></script>
 </body>
 </html>
