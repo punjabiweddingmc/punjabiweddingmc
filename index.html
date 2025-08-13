@@ -5,73 +5,70 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Punjabi Wedding MC</title>
 
-<!-- Fonts (unchanged: Raleway + Satisfy + Oswald + EB Garamond) -->
+<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=EB+Garamond:wght@400;500;600&family=Oswald:wght@500;700&family=Satisfy&display=swap" rel="stylesheet" />
 
 <style>
   :root{
-    --bg:#FFD300;          /* bright warm yellow */
+    --bg:#FFD300;          /* bright yellow */
     --maroon:#800000;
     --maroon-dark:#990000;
     --ink:#000;
     --card:#fff;
-    --blue:#0d6efd;        /* splash button / watermark blue */
+    --blue:#0d6efd;
     --blue-dark:#0a58ca;
   }
   html{scroll-behavior:smooth;}
   body{
     margin:0; background:var(--bg); color:var(--ink);
     font-family:"EB Garamond", Garamond, "Times New Roman", serif;
-    min-height:100%;
   }
 
-  /* ================= SPLASH (FULL SCREEN) ================= */
+  /* ===== SPLASH (scoped) ===== */
   #splash{
-    position:fixed; inset:0; z-index:9999;
+    position:fixed; inset:0; z-index:10000;
     background:var(--bg);
     display:flex; align-items:center; justify-content:center;
-    transition:opacity .8s ease;        /* fade OUT */
+    transition:opacity .6s ease, visibility 0s linear .6s;
+    opacity:1; visibility:visible;
   }
-  #splash.fade-out{ opacity:0; pointer-events:none; }
+  #splash.hidden{ opacity:0; visibility:hidden; }
 
-  .splash-wrapper{
-    position:relative; width:100%; height:100%;
-    display:flex; align-items:center; justify-content:center;
-    overflow:hidden;
+  #splash .wrap{
+    position:relative; width:100vw; height:100vh; overflow:hidden;
   }
-  /* Watermark behind image */
-  .splash-watermark{
+  #splash .watermark{
     position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-    font-family:"Oswald", sans-serif; font-weight:700; text-transform:uppercase;
-    letter-spacing:.12em; color:var(--blue); opacity:.18;
-    font-size:clamp(42px, 12vw, 160px);
-    z-index:1; pointer-events:none; white-space:nowrap;
+    font-family:"Oswald", sans-serif; font-weight:800; text-transform:uppercase;
+    color:var(--blue); opacity:.18; letter-spacing:.12em;
+    font-size:clamp(42px,14vw,160px);
+    pointer-events:none; z-index:1; white-space:nowrap;
   }
-  /* Image covers entire viewport */
-  .splash-img{
-    position:absolute; inset:0;
-    width:100%; height:100%;
-    object-fit:cover;                   /* fills screen (no gaps) */
-    z-index:2;
+  #splash .image{
+    position:absolute; inset:0; z-index:2;
+    display:block; width:100%; height:100%; object-fit:cover; /* fill screen */
   }
-  /* CTA button */
-  .splash-cta{
-    position:relative; z-index:3;
-    background:var(--blue); color:#fff; border:none;
-    padding:16px 30px; border-radius:12px;
-    font-weight:800; font-family:"Oswald", sans-serif; font-size:1.25rem;
-    box-shadow:0 6px 18px rgba(0,0,0,.25); cursor:pointer;
+  #splash .cta{
+    position:absolute; left:50%; bottom:8vh; transform:translateX(-50%);
+    z-index:3; background:var(--blue); color:#fff; border:none;
+    padding:16px 32px; border-radius:12px; font-weight:800;
+    font-family:"Oswald", sans-serif; font-size:1.25rem; cursor:pointer;
+    box-shadow:0 8px 22px rgba(0,0,0,.28);
   }
-  .splash-cta:hover{ background:var(--blue-dark); }
+  #splash .cta:active{ transform:translateX(-50%) scale(.98); }
+  #splash .cta:hover{ background:var(--blue-dark); }
 
-  /* ============== MAIN SITE (FADE IN AFTER SPLASH) ============== */
-  .site{
-    opacity:0; transform:translateY(8px);
-    transition:opacity .8s ease .2s, transform .8s ease .2s; /* fade IN */
+  /* Audio toggle (only visible during splash) */
+  .audio-toggle{
+    position:fixed; top:12px; right:12px; z-index:10001;
+    background:rgba(0,0,0,.35); color:#fff; border:0; border-radius:10px;
+    padding:8px 10px; font-size:18px; line-height:1; cursor:pointer;
+    backdrop-filter: blur(4px);
   }
-  .site.show{ opacity:1; transform:none; }
+  .audio-toggle[aria-pressed="true"]{ background:rgba(13,110,253,.85); }
+  body.reveal .audio-toggle{ display:none; } /* hide after entering site */
 
-  /* NAV + DROPDOWNS */
+  /* ===== SITE NAV ===== */
   header{position:sticky; top:0; z-index:900; background:var(--maroon);}
   nav{display:flex; justify-content:center;}
   nav ul{
@@ -82,10 +79,11 @@
   nav li{position:relative;}
   nav > ul > li > a{
     display:inline-block; padding:12px 18px; border-radius:8px;
-    color:#fff; text-decoration:none; font-weight:700;
-    font-family:"Oswald", sans-serif;
+    color:#fff; text-decoration:none; font-weight:700; font-family:"Oswald", sans-serif;
   }
   nav > ul > li:hover{ background:var(--maroon-dark); border-radius:8px; }
+
+  /* Dropdowns */
   nav ul li ul{
     display:none; position:absolute; top:100%; left:0;
     min-width:200px; background:#fff; border-radius:10px;
@@ -99,11 +97,15 @@
   }
   nav ul li ul li a:hover{ background:#f3f3f3; }
 
-  /* HERO / LAYOUT */
+  /* ===== MAIN CONTENT ===== */
+  .site{ opacity:0; transition:opacity .6s ease; } /* fade in */
+  body.reveal .site{ opacity:1; }
+
   .wrap{max-width:1000px; margin:0 auto; padding:24px 18px; text-align:center;}
   .logo{max-width:320px; width:90%; height:auto; margin:22px auto; display:block;}
-  /* >>> Fonts below are locked so the “Welcome” look never changes <<< */
-  h1{margin:10px 0 6px; line-height:1.15; font-size:36px; font-family:"Raleway", sans-serif;}
+
+  /* Keep your welcome fonts exactly as defined */
+  h1.welcome{margin:10px 0 6px; line-height:1.15; font-size:36px; font-family:"Raleway", sans-serif;}
   h2.heroBrand{margin:0; font-size:42px; line-height:1.1; font-family:"Satisfy", cursive; white-space:nowrap;}
 
   section{padding:40px 0;}
@@ -114,15 +116,19 @@
     display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
     max-width:960px; margin:18px auto 0; padding:0 12px;
   }
-  .ph{ background:var(--card); border-radius:10px; padding:40px 10px;
-       box-shadow:0 2px 8px rgba(0,0,0,.08); font-weight:600; }
+  .ph{
+    background:var(--card); border-radius:10px; padding:40px 10px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08); font-weight:600;
+  }
 
   .cards{
     display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
     max-width:960px; margin:12px auto 0; padding:0 12px;
   }
-  .card{ background:var(--card); border-radius:12px; padding:16px; text-align:left;
-         box-shadow:0 2px 10px rgba(0,0,0,.08); }
+  .card{
+    background:var(--card); border-radius:12px; padding:16px; text-align:left;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+  }
   .card h3{margin:0 0 8px; color:var(--maroon); font-family:"Oswald", sans-serif;}
   .card p{margin:0;}
 
@@ -141,11 +147,13 @@
     background:var(--card); max-width:680px; margin:0 auto; padding:18px;
     border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,.08);
   }
+
   .bio{
     max-width:800px; margin:20px auto;
     font-size:1.1em; line-height:1.6; color:#000; text-align:justify;
   }
 
+  /* Founder badge */
   .profile{
     position:fixed; bottom:20px; left:20px;
     display:flex; align-items:center; gap:10px;
@@ -157,26 +165,29 @@
   .profile .title{margin:2px 0 0; color:#666; font-size:13px;}
 
   @media (max-width:560px){
-    h1{font-size:30px;}
+    h1.welcome{font-size:30px;}
     h2.heroBrand{font-size:34px;}
-    .profile{left:12px; right:12px;}
   }
 </style>
 </head>
 <body>
 
-<!-- =============== SPLASH =============== -->
+<!-- ========= SPLASH ========= -->
 <div id="splash" aria-modal="true" role="dialog" aria-label="Welcome">
-  <div class="splash-wrapper">
-    <div class="splash-watermark">#1 Entertainer</div>
-    <img src="splash.png" alt="Arrjun Singh" class="splash-img" />
-    <button id="enterBtn" class="splash-cta" type="button">Enter the Website</button>
+  <div class="wrap">
+    <div class="watermark">#1 ENTERTAINER</div>
+    <img class="image" src="splash.png" alt="Arrjun Singh">
+    <button id="enterBtn" class="cta">Enter the Website</button>
   </div>
 </div>
 
-<!-- =============== MAIN SITE =============== -->
-<div class="site" id="site">
-  <!-- NAV -->
+<!-- Splash audio + toggle -->
+<audio id="splashAudio" src="splash.mp3" preload="auto"></audio>
+<button id="audioToggle" class="audio-toggle" aria-pressed="true" aria-label="Toggle splash sound">🔊</button>
+
+<!-- ========= SITE CONTENT ========= -->
+<div class="site">
+  <!-- NAV with dropdowns -->
   <header>
     <nav aria-label="Main">
       <ul>
@@ -216,8 +227,8 @@
 
   <!-- HERO -->
   <div id="home" class="wrap">
-    <img src="Logo.png" alt="Punjabi Wedding MC Logo" class="logo" />
-    <h1>Welcome to</h1>
+    <img src="Logo.png" alt="Punjabi Wedding MC Logo" class="logo"/>
+    <h1 class="welcome">Welcome to</h1>
     <h2 class="heroBrand">Punjabi Wedding MC</h2>
     <a class="btn" href="mailto:Punjabiweddingmc@gmail.com?subject=Booking%20Inquiry%20-%20Punjabi%20Wedding%20MC">Book Now</a>
 
@@ -225,7 +236,7 @@
       I’m <strong>Arrjun Singh</strong>, one of the top entertainers in the Pacific Northwest and across the United States, known for turning every celebration into an unforgettable experience.
       My passion for performance has taken me to international destinations including <strong>Mexico, Sri Lanka, Canada, and India</strong>, where I’ve brought energy, culture, and joy to weddings and special events.
       <br><br>
-      Beyond the stage, I’m a <strong>singer-songwriter</strong> with over <strong>20 singles</strong> available on Apple Music and Spotify, as well as one full-length album and one EP.
+      Beyond the stage, I’m a <strong>singer-songwriter</strong> with over <strong>20 singles</strong> on Apple Music and Spotify, as well as one album and one EP.
       I’m also the host of the <strong>Growing with Arrjun</strong> audio-video podcast on YouTube and Spotify, where I share stories and insights to inspire others.
       <br><br>
       Whether it’s MC’ing your big day, playing the dhol, creating captivating content, or simply making every moment memorable,
@@ -313,39 +324,64 @@
       <p class="title">CEO, Founder</p>
     </div>
   </div>
-</div><!-- /site -->
+</div><!-- /.site -->
 
-<!-- ===== JS: splash fade-out + site fade-in, once per session ===== -->
+<!-- ===== JS: splash + audio ===== -->
 <script>
   (function(){
     const splash = document.getElementById('splash');
     const enterBtn = document.getElementById('enterBtn');
-    const site = document.getElementById('site');
+    const audio = document.getElementById('splashAudio');
+    const toggle = document.getElementById('audioToggle');
 
-    // Show site immediately if already entered this session
+    // If user already entered this session, hide splash & show site
     if (sessionStorage.getItem('enteredSite') === '1') {
-      splash.style.display = 'none';
-      site.classList.add('show');
-    } else {
-      // keep site hidden until user enters
-      site.classList.remove('show');
+      splash.classList.add('hidden');
+      document.body.classList.add('reveal');
+    }
+
+    // Audio toggle
+    let soundOn = true;
+    toggle.addEventListener('click', () => {
+      soundOn = !soundOn;
+      toggle.setAttribute('aria-pressed', soundOn ? 'true' : 'false');
+      if (!soundOn) { audio.pause(); audio.currentTime = 0; }
+    });
+
+    function fadeOutAudio(){
+      if (audio && !audio.paused){
+        const step = 0.07;
+        const iv = setInterval(()=>{
+          audio.volume = Math.max(0, audio.volume - step);
+          if (audio.volume <= 0.05){
+            clearInterval(iv);
+            audio.pause();
+            audio.volume = 1; // reset for next time
+          }
+        }, 60);
+      }
     }
 
     function enterSite(e){
       if (e) e.preventDefault();
-      // fade out splash
-      splash.classList.add('fade-out');
-      // fade in site slightly after
-      setTimeout(() => site.classList.add('show'), 150);
-      // remove splash from layout after transition
-      setTimeout(() => { splash.style.display='none'; }, 850);
+
+      // Start audio on user gesture (mobile-safe)
+      if (soundOn) {
+        try { audio.currentTime = 0; audio.volume = 1; audio.play().catch(()=>{}); } catch(e){}
+      }
+
+      // Fade out splash + fade in site
+      splash.classList.add('hidden');
+      document.body.classList.add('reveal');
       sessionStorage.setItem('enteredSite','1');
+
+      // Fade out the audio gently
+      fadeOutAudio();
     }
 
-    enterBtn.addEventListener('click', enterSite, { passive:true });
-    // Optional: tap background or press ESC to enter
-    splash.addEventListener('click', (e)=>{ if(e.target===splash) enterSite(e); }, { passive:true });
-    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') enterSite(e); });
+    enterBtn.addEventListener('click', enterSite, {passive:false});
+    // Optional: ESC also enters
+    document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') enterSite(e); });
   })();
 </script>
 
