@@ -7,11 +7,11 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
             background-color: #fff8dc; /* Light yellow */
             color: black;
             margin: 0;
             padding: 0;
+            text-align: center;
         }
         header {
             padding: 20px;
@@ -30,17 +30,53 @@
         p {
             font-size: 1.2em;
         }
+        .founder {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .founder img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-right: 10px;
+            object-fit: cover;
+            border: 2px solid #800000;
+        }
+        .founder-info {
+            text-align: left;
+        }
+        .founder-info strong {
+            font-size: 1.1em;
+        }
+        .founder-info span {
+            font-size: 0.9em;
+            display: block;
+        }
     </style>
 </head>
 <body>
     <header>
-        <!-- Replace Logo.png with your actual logo file name -->
         <img src="Logo.png" alt="Punjabi Wedding MC Logo">
     </header>
     <main>
         <h1>Welcome to Punjabi Wedding MC</h1>
         <p>Your website is now live!</p>
     </main>
+
+    <!-- Founder Section -->
+    <div class="founder">
+        <img src="founder.jpg" alt="Arrjun Singh">
+        <div class="founder-info">
+            <strong>ARRJUN SINGH</strong>
+            <span>CEO, Founder</span>
+        </div>
+    </div>
 
     <!-- Load JavaScript files -->
     <script src="index.js"></script>
