@@ -15,6 +15,8 @@
     --maroon-dark:#990000;
     --ink:#000;
     --card:#fff;
+    --blue:#0d6efd;          /* splash button blue */
+    --blue-dark:#0a58ca;
   }
   html{scroll-behavior:smooth;}
   body{
@@ -50,13 +52,12 @@
   }
   nav ul li ul li a:hover{ background:#f3f3f3; }
 
-  /* LAYOUT / HERO */
+  /* Layout / hero */
   .wrap{max-width:1000px; margin:0 auto; padding:24px 18px; text-align:center;}
   .logo{max-width:320px; width:90%; height:auto; margin:22px auto; display:block;}
   h1{margin:10px 0 6px; line-height:1.15; font-size:36px; font-family:"Raleway", sans-serif;}
   h2.heroBrand{margin:0; font-size:42px; line-height:1.1; font-family:"Satisfy", cursive; white-space:nowrap;}
 
-  /* Sections */
   section{padding:40px 0;}
   section h2{font-family:"Oswald", sans-serif; font-size:28px; margin:0 0 14px;}
   section p{max-width:760px; margin:0 auto 14px;}
@@ -96,7 +97,6 @@
     background:var(--card); max-width:680px; margin:0 auto; padding:18px;
     border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,.08);
   }
-
   .bio{
     max-width:800px; margin:20px auto;
     font-size:1.1em; line-height:1.6; color:#000; text-align:justify;
@@ -113,49 +113,57 @@
   .profile .name{margin:0; font-weight:800;}
   .profile .title{margin:2px 0 0; color:#666; font-size:13px;}
 
-  /* SPLASH OVERLAY */
+  /* FULL-PAGE SPLASH */
   .splash{
-    position:fixed; inset:0; background:rgba(0,0,0,.65);
+    position:fixed; inset:0; z-index:10000;
+    background:var(--bg);                 /* shows behind transparent PNG */
     display:flex; align-items:center; justify-content:center;
-    z-index:10000; opacity:0; pointer-events:none;
-    transition:opacity .35s ease;
+    opacity:0; pointer-events:none; transition:opacity .5s ease;
   }
   .splash.show{ opacity:1; pointer-events:auto; }
-  .splash-card{
-    position:relative; width:min(92vw, 680px); border-radius:16px; overflow:hidden;
-    box-shadow:0 10px 40px rgba(0,0,0,.45); background:#000;
+
+  .splash-inner{
+    position:relative; width:100vw; height:100vh; overflow:hidden;
   }
-  .splash-img{
-    display:block; width:100%; height:auto; object-fit:cover; opacity:.95;
+  /* Center the transparent PNG, keep it big */
+  .splash-figure{
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    padding:6vh 4vw;
   }
-  .splash-btn{
-    position:absolute; bottom:14px; right:14px;
-    background:var(--maroon); color:#fff; border:none;
-    padding:12px 20px; border-radius:10px; font-weight:800;
-    font-family:"Oswald", sans-serif; cursor:pointer;
-    box-shadow:0 4px 12px rgba(0,0,0,.35);
+  .splash-figure img{
+    max-width:92vw; max-height:90vh; width:auto; height:auto; object-fit:contain;
+    display:block;
   }
-  .splash-btn:hover{ background:var(--maroon-dark); }
-  .splash-title{
-    position:absolute; left:14px; bottom:16px; right:150px;
-    color:#fff; font-size:28px; line-height:1.1;
-    font-family:"Satisfy", cursive; text-shadow:0 2px 12px rgba(0,0,0,.6);
+
+  /* Big button near top center */
+  .splash-cta{
+    position:absolute; top:7.5vh; left:50%; transform:translateX(-50%);
+    background:var(--blue); color:#fff; border:none;
+    padding:14px 28px; border-radius:12px; font-weight:800;
+    font-family:"Oswald", sans-serif; font-size:1.25rem; cursor:pointer;
+    box-shadow:0 6px 18px rgba(0,0,0,.25);
   }
-  @media (max-width:480px){
-    .splash-title{ font-size:22px; right:130px; }
-    .splash-btn{ padding:10px 16px; }
+  .splash-cta:hover{ background:var(--blue-dark); }
+
+  @media (max-width:560px){
+    h1{font-size:30px;}
+    h2.heroBrand{font-size:34px;}
+    .splash-cta{ top:6.5vh; padding:12px 22px; font-size:1.1rem; }
+    .profile{left:12px; right:12px;}
   }
 </style>
 </head>
 <body>
 
-<!-- SPLASH OVERLAY -->
+<!-- SPLASH (full page) -->
 <div id="splash" class="splash" aria-modal="true" role="dialog" aria-label="Welcome">
-  <div class="splash-card">
-    <!-- Replace splash.jpg with your chosen welcome image -->
-    <img src="splash.jpg" alt="Arrjun Singh" class="splash-img">
-    <div class="splash-title">Welcome to Punjabi Wedding MC</div>
-    <button id="enterBtn" class="splash-btn" aria-label="Enter the site">Enter the site</button>
+  <div class="splash-inner">
+    <button id="enterBtn" class="splash-cta" aria-label="Enter the website">Enter the Website</button>
+    <div class="splash-figure">
+      <!-- Use your transparent PNG here -->
+      <img src="splash.png" alt="Arrjun Singh">
+    </div>
   </div>
 </div>
 
@@ -200,7 +208,7 @@
 <!-- HERO -->
 <div id="home" class="wrap">
   <img src="Logo.png" alt="Punjabi Wedding MC Logo" class="logo"/>
-  <h1 style="font-family:'Raleway',sans-serif;">Welcome to</h1>
+  <h1>Welcome to</h1>
   <h2 class="heroBrand">Punjabi Wedding MC</h2>
   <a class="btn" href="mailto:Punjabiweddingmc@gmail.com?subject=Booking%20Inquiry%20-%20Punjabi%20Wedding%20MC">Book Now</a>
 
@@ -219,7 +227,7 @@
 <!-- HOME → PHOTOS -->
 <section id="photos" aria-labelledby="photos-title">
   <div class="wrap">
-    <h2 id="photos-title" style="font-family:'Oswald',sans-serif;">Photos</h2>
+    <h2 id="photos-title">Photos</h2>
     <p>Highlights from receptions, baraats, and sangeets. (Replace placeholders with your images.)</p>
     <div class="gallery">
       <div class="ph">Add Photo 1</div>
@@ -233,7 +241,7 @@
 <!-- HOME → VIDEOS -->
 <section id="videos" aria-labelledby="videos-title">
   <div class="wrap">
-    <h2 id="videos-title" style="font-family:'Oswald',sans-serif;">Videos</h2>
+    <h2 id="videos-title">Videos</h2>
     <p>Feature your best reels or YouTube embeds here.</p>
     <div class="gallery">
       <div class="ph">Add Video 1 (thumbnail)</div>
@@ -245,7 +253,7 @@
 <!-- SERVICES -->
 <section id="services" aria-labelledby="services-title">
   <div class="wrap">
-    <h2 id="services-title" style="font-family:'Oswald',sans-serif;">Services</h2>
+    <h2 id="services-title">Services</h2>
     <div class="cards">
       <div id="svc-mc" class="card">
         <h3>MC / Host</h3>
@@ -266,7 +274,7 @@
 <!-- PRICING -->
 <section id="pricing" aria-labelledby="pricing-title">
   <div class="wrap">
-    <h2 id="pricing-title" style="font-family:'Oswald',sans-serif;">Pricing</h2>
+    <h2 id="pricing-title">Pricing</h2>
     <div id="pricing-info" class="note">
       We cater to you according to your needs, making sure you are satisfied.
       Please email us your <strong>dates</strong>, <strong>location</strong>, <strong>timing</strong>, and the <strong>services</strong> you need.
@@ -279,7 +287,7 @@
 <!-- CONTACT -->
 <section id="contact" aria-labelledby="contact-title">
   <div class="wrap">
-    <h2 id="contact-title" style="font-family:'Oswald',sans-serif;">Contact Us</h2>
+    <h2 id="contact-title">Contact Us</h2>
     <div class="contact">
       <p><strong>Email:</strong> <a href="mailto:Punjabiweddingmc@gmail.com">Punjabiweddingmc@gmail.com</a></p>
       <p><strong>Phone:</strong> <a href="tel:+14402665763">440-266-5763</a></p>
@@ -297,28 +305,30 @@
   </div>
 </div>
 
-<!-- Splash logic -->
+<!-- Splash logic (fade-out + once per session) -->
 <script>
   (function(){
     const splash = document.getElementById('splash');
     const enterBtn = document.getElementById('enterBtn');
-
-    // show only once per session
     const alreadyEntered = sessionStorage.getItem('enteredSite');
+
     if (!alreadyEntered) {
       splash.classList.add('show');
-      // focus for accessibility
-      setTimeout(() => enterBtn.focus(), 50);
+      setTimeout(() => enterBtn && enterBtn.focus(), 60);
     }
 
     function closeSplash(){
-      splash.classList.remove('show');
-      sessionStorage.setItem('enteredSite', '1');
+      splash.style.opacity = '0';
+      // wait for CSS transition then remove
+      setTimeout(() => {
+        splash.classList.remove('show');
+        splash.style.display = 'none';
+      }, 520);
+      sessionStorage.setItem('enteredSite','1');
     }
 
     enterBtn.addEventListener('click', closeSplash);
-    // allow ESC key to close
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', (e)=>{
       if (e.key === 'Escape' && splash.classList.contains('show')) closeSplash();
     });
   })();
