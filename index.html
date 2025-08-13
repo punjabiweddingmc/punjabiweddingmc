@@ -30,10 +30,9 @@
         transition: opacity 1s ease;
         overflow: hidden;
     }
-    #splash img {
-        max-width: 90%;
-        height: auto;
-        z-index: 1;
+    .splash-wrapper {
+        position: relative;
+        display: inline-block;
     }
     .splash-watermark {
         position: absolute;
@@ -44,8 +43,17 @@
         z-index: 0;
         text-align: center;
         width: 100%;
-        top: 20%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         pointer-events: none;
+        white-space: nowrap;
+    }
+    #splash img {
+        max-width: 90%;
+        height: auto;
+        position: relative;
+        z-index: 1;
     }
     #enter-btn {
         background-color: var(--blue);
@@ -129,8 +137,10 @@
 
 <!-- Splash Screen -->
 <div id="splash">
-    <div class="splash-watermark">#1 ENTERTAINER</div>
-    <img src="founder.png" alt="Arrjun Singh">
+    <div class="splash-wrapper">
+        <div class="splash-watermark">#1 ENTERTAINER</div>
+        <img src="splash.png" alt="Arrjun Singh">
+    </div>
     <button id="enter-btn">Enter the Website</button>
 </div>
 
