@@ -1,200 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Punjabi Wedding MC</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Punjabi Wedding MC — Shining With The Stars</title>
 
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Oswald:wght@500;700&family=EB+Garamond:wght@400;500;600&family=Satisfy&display=swap&family=Anton&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg:#FFD700;
+      --maroon:#800000;
+      --ink:#000;
+      --white:#fff;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; background:var(--bg); color:var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-<style>
-  :root{
-    --bg:#FFD300;
-    --maroon:#800000;
-    --maroon-dark:#990000;
-    --ink:#000;
-    --white:#fff;
-    --blue:#0d6efd;
-    --blue-dark:#0a58ca;
-    --shadow:0 8px 22px rgba(0,0,0,.25);
-  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{
-    margin:0; background:var(--bg); color:var(--ink);
-    font-family:"EB Garamond", Garamond, "Times New Roman", serif;
-  }
+    /* Top nav (simple) */
+    nav{
+      background:var(--maroon); padding:12px 10px; text-align:center;
+      position:sticky; top:0; z-index:10;
+    }
+    nav a{
+      color:#fff; text-decoration:none; font-weight:700; margin:0 18px;
+    }
 
-  /* Splash Screen */
-  #splash{
-    position:fixed; inset:0; z-index:9999;
-    background:var(--bg);
-    display:flex; align-items:center; justify-content:center;
-    overflow:hidden; opacity:1;
-    transition:opacity .75s ease, visibility 0s linear .75s;
-    visibility:visible;
-  }
-  #splash.hidden{opacity:0; visibility:hidden}
-  .s-wrap{position:relative; width:100vw; height:100vh}
-  .s-watermark{
-    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-    font-family:"Oswald", sans-serif; font-weight:900; text-transform:uppercase;
-    color:var(--blue); opacity:.18; letter-spacing:.08em;
-    font-size:clamp(28px,10vw,90px); white-space:nowrap; pointer-events:none;
-  }
-  .s-photo{
-    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
-    width:100%; height:100%; object-fit:cover; pointer-events:none;
-  }
-  .s-cta{
-    position:absolute; left:50%; bottom:8vh; transform:translateX(-50%);
-    background:var(--blue); color:#fff; border:0; border-radius:12px;
-    padding:14px 28px; font-family:"Oswald", sans-serif; font-weight:800; font-size:1.15rem;
-    box-shadow:var(--shadow); cursor:pointer;
-  }
-  .s-cta:hover{background:var(--blue-dark)}
-  .s-cta:active{transform:translateX(-50%) scale(.98)}
+    /* Heading */
+    h2{
+      text-align:center; font-size:28px; margin:20px 10px 8px;
+      font-weight:800;
+    }
 
-  /* Site Layout */
-  .site{opacity:0; transition:opacity .6s ease}
-  body.reveal .site{opacity:1}
-  header{
-    position:sticky; top:0; z-index:1200; background:var(--maroon);
-    box-shadow:0 2px 10px rgba(0,0,0,.15);
-  }
-  nav{max-width:1100px; margin:0 auto}
-  .menu{
-    display:flex; align-items:center; justify-content:space-evenly;
-    list-style:none; margin:0; padding:10px 8px;
-  }
-  .menu > li{position:relative}
-  .menu > li > button,
-  .menu > li > a{
-    background:transparent; border:0; color:#fff; font-family:"Oswald", sans-serif;
-    font-weight:700; font-size:1.05rem; padding:10px 16px; border-radius:8px; cursor:pointer;
-  }
-  .menu > li:hover > button,
-  .menu > li:hover > a,
-  .menu > li.open > button{ background:var(--maroon-dark) }
-  .dropdown{
-    position:absolute; left:50%; transform:translateX(-50%);
-    top:100%; min-width:220px; background:#fff; border-radius:12px;
-    box-shadow:0 10px 26px rgba(0,0,0,.18); padding:8px; display:none; z-index:1300;
-  }
-  .menu > li.open .dropdown{ display:block }
-  .dropdown a{
-    display:block; padding:10px 12px; border-radius:8px; color:var(--maroon);
-    text-decoration:none; font-weight:600; font-family:"EB Garamond", serif;
-  }
-  .dropdown a:hover{ background:#f3f3f3 }
+    /* Grid gallery */
+    .gallery{
+      display:grid; gap:20px; padding:20px; max-width:1100px; margin:0 auto;
+      grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+    }
+    .gallery-item{
+      background:#fff; border-radius:12px; overflow:hidden;
+      box-shadow:0 2px 10px rgba(0,0,0,.15);
+    }
+    .gallery-item img{
+      width:100%; height:auto; display:block; cursor:pointer;
+    }
+    .caption{
+      background:#000; color:#fff; text-align:center; padding:10px 12px;
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; /* poster vibe */
+      font-size:18px; letter-spacing:.3px;
+    }
 
-  .wrap{max-width:1000px; margin:0 auto; padding:22px 18px; text-align:center}
-  .logo{max-width:320px; width:90%; height:auto; margin:18px auto 10px; display:block}
-
-  h1.welcome{margin:10px 0 6px; line-height:1.15; font-size:36px; font-family:"Raleway", sans-serif}
-  h2.brand{margin:0; font-size:42px; line-height:1.1; font-family:"Satisfy", cursive; white-space:nowrap}
-
-  .btn{display:inline-block; margin-top:16px; padding:12px 26px; color:#fff; background:var(--maroon); border-radius:8px; text-decoration:none; font-weight:700; font-family:"Oswald", sans-serif}
-  .btn:hover{ background:var(--maroon-dark) }
-
-  section{padding:40px 0}
-  section h2{font-family:"Oswald", sans-serif; font-size:28px; margin:0 0 14px}
-  section p{max-width:760px; margin:0 auto 14px}
-
-  /* Grid Galleries */
-  .gallery{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); max-width:960px; margin:18px auto 0; padding:0 12px}
-  .ph{background:#fff; border-radius:10px; padding:40px 10px; box-shadow:0 2px 8px rgba(0,0,0,.08); font-weight:600}
-
-  .stars-grid{
-    display:grid; gap:12px;
-    grid-template-columns: repeat(3, 1fr);
-    max-width:960px; margin:18px auto 0; padding:0 12px;
-  }
-  @media (max-width:900px){ .stars-grid{ grid-template-columns:repeat(2,1fr); } }
-  @media (max-width:520px){ .stars-grid{ grid-template-columns:1fr; } }
-  .stars-grid figure{background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,.08); margin:0}
-  .stars-grid img{width:100%; height:auto; display:block}
-  .stars-grid figcaption{padding:10px; font-family:'Anton', sans-serif; font-size:1.1rem; text-align:center; background:#000; color:#fff}
-
-  .cards{display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); max-width:960px; margin:12px auto 0; padding:0 12px}
-  .card{background:#fff; border-radius:12px; padding:16px; text-align:left; box-shadow:0 2px 10px rgba(0,0,0,.08)}
-  .card h3{margin:0 0 8px; color:var(--maroon); font-family:"Oswald", sans-serif}
-
-  .note{background:#fff; border-left:6px solid var(--maroon); margin:14px auto; max-width:820px; padding:16px; border-radius:10px; text-align:left}
-  .contact{background:#fff; max-width:680px; margin:0 auto; padding:18px; border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,.08)}
-  .bio{max-width:800px; margin:20px auto; font-size:1.1em; line-height:1.6; text-align:justify}
-  .profile{position:fixed; bottom:20px; left:20px; z-index:100; display:flex; align-items:center; gap:10px; background:#fff; padding:10px 12px; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,.15)}
-  .profile img{width:64px; height:64px; border-radius:50%; object-fit:cover; border:2px solid var(--maroon)}
-</style>
+    /* Lightbox */
+    .lightbox{
+      position:fixed; inset:0; background:rgba(0,0,0,.9);
+      display:none; align-items:center; justify-content:center; z-index:9999;
+      padding:20px;
+    }
+    .lightbox.show{ display:flex; }
+    .lightbox img{
+      max-width:95vw; max-height:90vh; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,.5);
+    }
+    .lb-close{
+      position:fixed; top:14px; right:14px; background:#fff; border:0;
+      border-radius:999px; padding:8px 11px; font-weight:700; cursor:pointer;
+    }
+  </style>
 </head>
 <body>
 
-<!-- Splash -->
-<div id="splash">
-  <div class="s-wrap">
-    <div class="s-watermark">#1 ENTERTAINER</div>
-    <img class="s-photo" src="splash.png" alt="Arrjun Singh">
-    <button id="enterBtn" class="s-cta" type="button">Enter the Website</button>
-    <audio id="splashAudio" src="splash.mp3" preload="auto"></audio>
-  </div>
-</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="#services">Services</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#contact">Contact Us</a>
+  </nav>
 
-<div class="site" id="site">
-  <header>
-    <nav>
-      <ul class="menu" id="menu">
-        <li><button type="button">Home</button></li>
-        <li><button type="button">Services</button></li>
-        <li><button type="button">Pricing</button></li>
-        <li><button type="button">Contact Us</button></li>
-      </ul>
-    </nav>
-  </header>
+  <h2>Shining With The Stars</h2>
 
-  <div id="home" class="wrap">
-    <img src="Logo.png" alt="Punjabi Wedding MC Logo" class="logo" />
-    <h1 class="welcome">Welcome to</h1>
-    <h2 class="brand">Punjabi Wedding MC</h2>
-  </div>
-
-  <!-- Photos -->
-  <section id="photos">
-    <div class="wrap">
-      <h2>Photos</h2>
-      <p>Highlights from receptions, baraats, and sangeets.</p>
-      <div class="gallery">
-        <div class="ph">Add Photo 1</div>
-        <div class="ph">Add Photo 2</div>
-      </div>
-
-      <h2>Shining With The Stars</h2>
-      <div class="stars-grid">
-        <figure><img src="jazzyb.jpg"><figcaption>With Jazzy B</figcaption></figure>
-        <figure><img src="garrysandhu.jpg"><figcaption>With Garry Sandhu</figcaption></figure>
-        <figure><img src="raghav.jpg"><figcaption>With Raghav</figcaption></figure>
-        <figure><img src="babbu.jpg"><figcaption>With Babbu</figcaption></figure>
-        <figure><img src="surjitkhan.jpg"><figcaption>With Surjit Khan</figcaption></figure>
-        <figure><img src="djgoddess.jpg"><figcaption>With DJ Goddess</figcaption></figure>
-        <figure><img src="djhans.jpg"><figcaption>With DJ Hans</figcaption></figure>
-      </div>
+  <div class="gallery" id="starsGallery">
+    <div class="gallery-item">
+      <img src="stars1.jpg" alt="With Jazzy B" />
+      <div class="caption">With Jazzy B</div>
     </div>
-  </section>
-</div>
+    <div class="gallery-item">
+      <img src="stars2.jpg" alt="With Garry Sandhu" />
+      <div class="caption">With Garry Sandhu</div>
+    </div>
+    <div class="gallery-item">
+      <img src="stars3.jpg" alt="With Raghav" />
+      <div class="caption">With Raghav</div>
+    </div>
+    <div class="gallery-item">
+      <img src="stars4.jpg" alt="With Babbu" />
+      <div class="caption">With Babbu</div>
+    </div>
+    <div class="gallery-item">
+      <img src="stars5.jpg" alt="With Surjit Khan" />
+      <div class="caption">With Surjit Khan</div>
+    </div>
+    <div class="gallery-item">
+      <img src="stars6.jpg" alt="With DJ Goddess" />
+      <div class="caption">With DJ Goddess</div>
+    </div>
+    <div class="gallery-item">
+      <img src="stars7.jpg" alt="With DJ Hans" />
+      <div class="caption">With DJ Hans</div>
+    </div>
+  </div>
 
-<script>
-  (function(){
-    const splash = document.getElementById('splash');
-    const enterBtn = document.getElementById('enterBtn');
-    const audio = document.getElementById('splashAudio');
-    window.addEventListener('load', () => { audio.play().catch(()=>{}); });
-    enterBtn.addEventListener('click', () => {
-      splash.classList.add('hidden');
-      audio.pause();
-      document.body.classList.add('reveal');
-    });
-  })();
-</script>
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-modal="true" role="dialog" aria-label="Image viewer">
+    <img id="lightboxImg" alt="">
+    <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+  </div>
+
+  <script>
+    // Simple lightbox
+    (function(){
+      const lb = document.getElementById('lightbox');
+      const lbImg = document.getElementById('lightboxImg');
+      const lbClose = document.getElementById('lbClose');
+
+      document.querySelectorAll('#starsGallery img').forEach(img=>{
+        img.addEventListener('click', ()=>{
+          lbImg.src = img.src;
+          lb.classList.add('show');
+        });
+      });
+
+      const close = ()=> lb.classList.remove('show');
+      lb.addEventListener('click', (e)=>{ if(e.target===lb) close(); });
+      lbClose.addEventListener('click', close);
+      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+    })();
+  </script>
 
 </body>
 </html>
