@@ -136,6 +136,18 @@
     h1.welcome{font-size:30px}
     h2.brand{font-size:34px}
   }
+
+  /* ---- Instagram grid (added) ---- */
+  .insta-grid{
+    display:grid;
+    gap:14px;
+    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+    justify-items:center;
+  }
+  .insta-embed{
+    max-width:360px;
+    width:100%;
+  }
 </style>
 </head>
 <body>
@@ -222,14 +234,21 @@
     </div>
   </section>
 
-  <!-- HOME → VIDEOS -->
+  <!-- HOME → VIDEOS (UPDATED) -->
   <section id="videos" aria-labelledby="videos-title">
     <div class="wrap">
       <h2 id="videos-title">Videos</h2>
-      <p>Feature your best reels or YouTube embeds here.</p>
-      <div class="gallery">
-        <div class="ph">Add Video 1 (thumbnail)</div>
-        <div class="ph">Add Video 2 (thumbnail)</div>
+      <p>Recent reels and highlights.</p>
+
+      <div class="insta-grid">
+        <!-- Reel 1 -->
+        <blockquote class="instagram-media insta-embed" data-instgrm-permalink="https://www.instagram.com/reel/DKvgFxIx5LK/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:12px;"></blockquote>
+
+        <!-- Reel 2 -->
+        <blockquote class="instagram-media insta-embed" data-instgrm-permalink="https://www.instagram.com/reel/DMDiCf3JODq/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:12px;"></blockquote>
+
+        <!-- Reel 3 -->
+        <blockquote class="instagram-media insta-embed" data-instgrm-permalink="https://www.instagram.com/reel/DKIUjLnhTfG/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:12px;"></blockquote>
       </div>
     </div>
   </section>
@@ -272,7 +291,7 @@
   <section id="contact" aria-labelledby="contact-title">
     <div class="wrap">
       <h2 id="contact-title">Contact Us</h2>
-      <div class="contact">
+    <div class="contact">
         <p><strong>Email:</strong> <a href="mailto:Punjabiweddingmc@gmail.com">Punjabiweddingmc@gmail.com</a></p>
         <p><strong>Phone:</strong> <a href="tel:+14402665763">440-266-5763</a></p>
         <p><strong>Instagram:</strong> <a href="https://instagram.com/punjabiweddingmc" target="_blank" rel="noopener">@punjabiweddingmc</a></p>
@@ -357,6 +376,9 @@
 
   })();
 </script>
+
+<!-- Instagram embed script (added) -->
+<script async src="https://www.instagram.com/embed.js"></script>
 
 </body>
 </html>
