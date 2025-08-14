@@ -111,8 +111,9 @@
   section h2{font-family:"Oswald", sans-serif; font-size:28px; margin:0 0 14px}
   section p{max-width:760px; margin:0 auto 14px}
 
-  .gallery{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); max-width:960px; margin:18px auto 0; padding:0 12px}
-  .ph{background:#fff; border-radius:10px; padding:40px 10px; box-shadow:0 2px 8px rgba(0,0,0,.08); font-weight:600}
+  /* Generic gallery cell */
+  .ph{background:#fff; border-radius:10px; padding:0; box-shadow:0 2px 8px rgba(0,0,0,.08); overflow:hidden}
+  .ph img{display:block; width:100%; height:240px; object-fit:cover}
 
   .cards{display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); max-width:960px; margin:12px auto 0; padding:0 12px}
   .card{background:#fff; border-radius:12px; padding:16px; text-align:left; box-shadow:0 2px 10px rgba(0,0,0,.08)}
@@ -151,6 +152,11 @@
   .tab-pane{ display:none; }
   .tab-pane.active{ display:block; }
 
+  .gallery{
+    display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    max-width:960px; margin:18px auto 0; padding:0 12px;
+  }
+
   .stars-grid{
     display:grid; gap:12px;
     grid-template-columns: repeat(3, 1fr);
@@ -159,7 +165,7 @@
   @media (max-width:900px){ .stars-grid{ grid-template-columns:repeat(2,1fr); } }
   @media (max-width:520px){ .stars-grid{ grid-template-columns:1fr; } }
   .stars-grid figure{background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,.08); margin:0}
-  .stars-grid img{width:100%; height:240px; object-fit:cover; display:block; cursor:pointer; background:#fff;}
+  .stars-grid img{width:100%; height:260px; object-fit:cover; display:block; cursor:pointer; background:#fff;}
   .stars-grid figcaption{
     padding:10px; text-align:center; font-family:"Bebas Neue", sans-serif;
     font-size:20px; letter-spacing:.5px; color:#000;
@@ -257,13 +263,14 @@
         <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-stars" id="tab-stars-btn">Shining With The Stars</button>
       </div>
 
-      <!-- Tab: Highlights (your existing placeholders) -->
+      <!-- Tab: Highlights (now showing your 5 images) -->
       <div id="tab-highlights" class="tab-pane active" role="tabpanel" aria-labelledby="tab-highlights-btn">
         <div class="gallery">
-          <div class="ph">Add Photo 1</div>
-          <div class="ph">Add Photo 2</div>
-          <div class="ph">Add Photo 3</div>
-          <div class="ph">Add Photo 4</div>
+          <div class="ph"><img src="highlight-1.jpg" alt="Highlight 1"></div>
+          <div class="ph"><img src="highlight-2.jpg" alt="Highlight 2"></div>
+          <div class="ph"><img src="highlight-3.jpg" alt="Highlight 3"></div>
+          <div class="ph"><img src="highlight-4.jpg" alt="Highlight 4"></div>
+          <div class="ph"><img src="highlight-5.jpg" alt="Highlight 5"></div>
         </div>
       </div>
 
@@ -293,13 +300,13 @@
       <h2 id="videos-title">Videos</h2>
       <p>Recent reels and highlights.</p>
 
-      <div class="insta-grid">
+      <div class="gallery" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
         <!-- Reel 1 -->
-        <blockquote class="instagram-media insta-embed" data-instgrm-permalink="https://www.instagram.com/reel/DKvgFxIx5LK/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:12px;"></blockquote>
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DKvgFxIx5LK/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:12px; width:100%; min-width:280px;"></blockquote>
         <!-- Reel 2 -->
-        <blockquote class="instagram-media insta-embed" data-instgrm-permalink="https://www.instagram.com/reel/DMDiCf3JODq/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:12px;"></blockquote>
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DMDiCf3JODq/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:12px; width:100%; min-width:280px;"></blockquote>
         <!-- Reel 3 -->
-        <blockquote class="instagram-media insta-embed" data-instgrm-permalink="https://www.instagram.com/reel/DKIUjLnhTfG/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:12px;"></blockquote>
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DKIUjLnhTfG/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:12px; width:100%; min-width:280px;"></blockquote>
       </div>
     </div>
   </section>
@@ -329,7 +336,7 @@
   <section id="pricing" aria-labelledby="pricing-title">
     <div class="wrap">
       <h2 id="pricing-title">Pricing</h2>
-      <div id="pricing-info" class="note">
+    <div id="pricing-info" class="note">
         We cater to you according to your needs, making sure you are satisfied.
         Please email us your <strong>dates</strong>, <strong>location</strong>, <strong>timing</strong>, and the <strong>services</strong> you need.
         We will get back to you within <strong>48 hours</strong>.
@@ -366,6 +373,7 @@
     const splash = document.getElementById('splash');
     const enterBtn = document.getElementById('enterBtn');
     const audio = document.getElementById('splashAudio');
+
     function startAudio(){
       audio.loop = true;
       audio.volume = 1;
