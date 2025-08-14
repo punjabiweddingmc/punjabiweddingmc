@@ -3,120 +3,116 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>PUNJABI WEDDING MC — Official Site</title>
+  <title>Punjabi Wedding MC</title>
 
-  <!-- Base styles (theme-friendly, uses system fonts; easy to match your brand) -->
+  <!-- Poster-style font for captions only (safe fallback to Impact/System) -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
   <style>
+    /* ===== THEME (RESTORED TO GOLD/YELLOW + MAROON) ===== */
     :root{
-      --bg:#0b0b0b;           /* page background */
-      --fg:#f3f3f3;           /* main text color */
-      --muted:#b8b8b8;        /* secondary text */
-      --accent:#caa10a;       /* gold accent */
-      --card:#141414;         /* card background */
-      --shadow:0 10px 30px rgba(0,0,0,.35);
-      --radius:18px;
+      --bg: #FFD200;          /* page background (gold/yellow) */
+      --text: #111111;        /* main text (near-black) */
+      --muted: #4a3d00;       /* secondary text (warm) */
+      --maroon: #7A0E0E;      /* header + buttons */
+      --maroon-dark:#5F0B0B;  /* hover */
+      --card:#FFFFFF;         /* white cards */
+      --shadow: 0 8px 24px rgba(0,0,0,.15);
+      --radius: 18px;
+      --maxw: 1100px;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0;background:var(--bg);color:var(--fg);
-      font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+      margin:0;background:var(--bg);color:var(--text);
+      font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
     }
     img{max-width:100%;display:block}
 
-    /* Splash (restored) */
-    .splash{
-      position:fixed;inset:0;background:radial-gradient(1200px 600px at 70% -10%,rgba(202,161,10,.2),transparent) , var(--bg);
-      display:flex;align-items:center;justify-content:center;z-index:1000;
-    }
+    /* ===== SPLASH (RESTORED) ===== */
+    .splash{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:1000}
     .splash-card{
-      background:var(--card);padding:32px 28px;border-radius:var(--radius);
-      box-shadow:var(--shadow);max-width:520px;width:88%;text-align:center;
+      background:var(--card);padding:28px 24px;border-radius:var(--radius);
+      box-shadow:var(--shadow);max-width:520px;width:88%;text-align:center;border:2px solid var(--maroon)
     }
-    .brand{font-weight:800;letter-spacing:.5px;font-size:28px;margin:0 0 6px}
+    .brand{font-weight:900;letter-spacing:.5px;font-size:28px;margin:0 0 6px;color:var(--maroon)}
     .tag{color:var(--muted);margin:0 0 18px}
     .btn{
-      appearance:none;border:0;border-radius:999px;background:var(--accent);
-      color:#000;font-weight:800;letter-spacing:.4px;padding:14px 22px;cursor:pointer;
+      appearance:none;border:0;border-radius:999px;background:var(--maroon);
+      color:#fff;font-weight:800;letter-spacing:.4px;padding:12px 18px;cursor:pointer
     }
-    .btn:active{transform:translateY(1px)}
+    .btn:hover{background:var(--maroon-dark)}
 
-    /* Header / Nav */
-    header{position:sticky;top:0;background:rgba(11,11,11,.86);backdrop-filter:blur(12px);z-index:900;border-bottom:1px solid rgba(255,255,255,.06)}
-    .nav{
-      display:flex;align-items:center;justify-content:space-between;
-      max-width:1100px;margin:0 auto;padding:14px 16px;
-    }
+    /* ===== HEADER / NAV (MAROON BAR) ===== */
+    header{position:sticky;top:0;z-index:900;background:var(--maroon);color:#fff}
+    .nav{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
     .nav-title{font-weight:900;letter-spacing:.6px}
-    .menu{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+    .menu{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
     .menu a,.menu button{
-      color:var(--fg);text-decoration:none;padding:8px 12px;border-radius:12px;border:0;background:transparent;cursor:pointer;
+      color:#fff;text-decoration:none;padding:8px 12px;border-radius:12px;border:1px solid transparent;background:transparent;cursor:pointer
     }
-    .menu a:hover,.menu button:hover{background:rgba(255,255,255,.06)}
+    .menu a:hover,.menu button:hover{background:rgba(255,255,255,.12)}
+    .tab-btn.active{background:#F2C100;color:#000;border-color:#F2C100}
     .dropdown{position:relative}
     .dropdown-menu{
-      position:absolute;top:100%;left:0;background:var(--card);border:1px solid rgba(255,255,255,.08);
-      border-radius:14px;box-shadow:var(--shadow);min-width:200px;display:none;overflow:hidden;
+      position:absolute;top:100%;left:0;background:#fff;color:var(--text);border-radius:12px;
+      border:1px solid rgba(0,0,0,.08);box-shadow:var(--shadow);display:none;min-width:200px;overflow:hidden
     }
-    .dropdown-menu a{display:block;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.06)}
+    .dropdown-menu a{display:block;color:var(--text);padding:10px 12px;text-decoration:none;border-bottom:1px solid rgba(0,0,0,.06)}
     .dropdown-menu a:last-child{border-bottom:0}
     .dropdown.open .dropdown-menu{display:block}
 
-    /* Main layout */
-    main{max-width:1100px;margin:24px auto;padding:0 16px 80px}
+    /* ===== MAIN LAYOUT ===== */
+    main{max-width:var(--maxw);margin:22px auto;padding:0 16px 80px}
 
-    /* Tabs (top level pages) */
-    .tabs{display:flex;gap:10px;flex-wrap:wrap;margin:-6px 0 18px}
-    .tab-btn{
-      padding:10px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.12);
-      background:transparent;color:var(--fg);cursor:pointer
-    }
-    .tab-btn.active{background:var(--accent);color:#000;border-color:transparent}
-    .tab-panel{display:none}
-    .tab-panel.active{display:block}
-
-    /* Section headers */
-    .section-title{font-size:28px;letter-spacing:.5px;margin:0 0 6px}
+    /* Titles */
+    .section-title{font-size:34px;letter-spacing:.5px;margin:0 0 6px}
     .section-subtitle{color:var(--muted);margin:0 0 18px}
 
-    /* Photos page: sub-tabs */
+    /* Generic card */
+    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(0,0,0,.06);padding:16px}
+
+    /* ===== PHOTOS PAGE SUB-TABS (MAROON PILLS) ===== */
     .subtabs{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 16px}
-    .subtab-btn{padding:8px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:transparent;color:var(--fg);cursor:pointer}
-    .subtab-btn.active{background:rgba(202,161,10,.18);border-color:var(--accent)}
+    .subtab-btn{
+      padding:8px 12px;border-radius:999px;border:2px solid var(--maroon);
+      background:var(--maroon);color:#fff;cursor:pointer;font-weight:700
+    }
+    .subtab-btn:hover{background:var(--maroon-dark);border-color:var(--maroon-dark)}
+    .subtab-btn.active{background:#fff;color:var(--maroon)}
     .subpanel{display:none}
     .subpanel.active{display:block}
 
-    /* Highlights — horizontal scroll row */
+    /* ===== HIGHLIGHTS (HORIZONTAL SCROLL) ===== */
     #highlights .hlx-row{
       display:flex;gap:18px;overflow-x:auto;padding:8px 6px 14px;
-      scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+      scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch
     }
     #highlights .hlx-row::-webkit-scrollbar{height:8px}
-    #highlights .hlx-row::-webkit-scrollbar-thumb{background:var(--accent);border-radius:999px}
+    #highlights .hlx-row::-webkit-scrollbar-thumb{background:var(--maroon);border-radius:999px}
     #highlights .hlx-card{
-      flex:0 0 auto;min-width:240px;max-width:280px;background:var(--card);border-radius:var(--radius);
-      box-shadow:var(--shadow);scroll-snap-align:start;overflow:hidden;border:1px solid rgba(255,255,255,.06)
+      flex:0 0 auto;min-width:240px;max-width:280px;background:var(--card);
+      border-radius:var(--radius);box-shadow:var(--shadow);scroll-snap-align:start;overflow:hidden;border:1px solid rgba(0,0,0,.06)
     }
     #highlights .hlx-card img{width:100%;height:200px;object-fit:cover}
     #highlights .hlx-cap{
-      font-weight:800;letter-spacing:.4px;text-align:center;padding:10px 12px;line-height:1.1
+      font-family:"Bebas Neue", Impact, system-ui, sans-serif;
+      font-size:1.4rem;letter-spacing:.4px;text-align:center;padding:10px 12px;line-height:1;color:var(--text)
     }
 
-    /* Shining With The Stars — grid gallery */
+    /* ===== STARS (GRID) — unchanged if you already had it ===== */
     #stars .grid{
-      --min: 220px;
-      display:grid;gap:16px;
-      grid-template-columns:repeat(auto-fill,minmax(var(--min),1fr));
+      --min:220px;display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(var(--min),1fr))
     }
-    #stars .card{
-      background:var(--card);border-radius:var(--radius);overflow:hidden;
-      box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.06)
-    }
+    #stars .card{overflow:hidden}
     #stars .card img{width:100%;aspect-ratio:1/1;object-fit:cover}
-    #stars .cap{font-weight:800;letter-spacing:.4px;text-align:center;padding:10px 12px}
+    #stars .cap{
+      font-family:"Bebas Neue", Impact, system-ui, sans-serif;
+      text-align:center;font-weight:800;letter-spacing:.4px;padding:10px 12px;color:var(--text)
+    }
 
-    /* Footer */
-    footer{border-top:1px solid rgba(255,255,255,.08);padding:32px 16px;color:var(--muted);text-align:center}
+    /* Utilities */
+    .grid3{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
     .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
     @media (max-width:520px){
       #highlights .hlx-card{min-width:200px;max-width:220px}
@@ -126,16 +122,16 @@
 </head>
 <body>
 
-  <!-- Splash / Enter (restored) -->
+  <!-- ===== SPLASH ===== -->
   <div class="splash" id="splash">
     <div class="splash-card">
-      <h1 class="brand">PUNJABI WEDDING MC</h1>
-      <p class="tag">MC • Dhol • Live Performances • Seattle & Worldwide</p>
-      <button class="btn" id="enterBtn" aria-label="Enter site">Enter Website</button>
+      <h1 class="brand">Punjabi Wedding MC</h1>
+      <p class="tag">MC • Dhol • Live Performances</p>
+      <button class="btn" id="enterBtn">Enter Website</button>
     </div>
   </div>
 
-  <!-- Header / Navigation -->
+  <!-- ===== HEADER / NAV ===== -->
   <header>
     <nav class="nav" aria-label="Main">
       <div class="nav-title">Punjabi Wedding MC</div>
@@ -154,167 +150,125 @@
     </nav>
   </header>
 
+  <!-- ===== CONTENT ===== -->
   <main>
-    <!-- Top-level tabs -->
-    <section id="home" class="tab-panel active" aria-labelledby="Home">
+    <!-- HOME -->
+    <section id="home" class="tab-panel active">
       <h2 class="section-title">Welcome</h2>
       <p class="section-subtitle">High-energy hosting and dhol that turns moments into memories.</p>
-      <div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
-        <div style="background:var(--card);padding:16px;border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.06)">
+      <div class="grid3">
+        <div class="card">
           <h3 style="margin:0 0 8px">What I Do</h3>
           <p style="margin:0;color:var(--muted)">Reception MC, Baraat hype, dhol sets, sangeet curation, and celebrity events.</p>
         </div>
-        <div style="background:var(--card);padding:16px;border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.06)">
+        <div class="card">
           <h3 style="margin:0 0 8px">Where I Work</h3>
           <p style="margin:0;color:var(--muted)">Seattle & the Pacific Northwest — available for travel nationwide.</p>
         </div>
-        <div style="background:var(--card);padding:16px;border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.06)">
+        <div class="card">
           <h3 style="margin:0 0 8px">Book Me</h3>
           <p style="margin:0;color:var(--muted)">DM @PunjabiWeddingMC or email below for dates & packages.</p>
         </div>
       </div>
     </section>
 
-    <section id="photos" class="tab-panel" aria-labelledby="Photos">
+    <!-- PHOTOS -->
+    <section id="photos" class="tab-panel">
       <h2 class="section-title">Photos</h2>
-      <p class="section-subtitle">Swipe through highlights or browse star moments.</p>
+      <p class="section-subtitle">Highlights from receptions, baraats, and sangeets.</p>
 
-      <!-- Sub-tabs for Photos -->
+      <!-- sub-tabs -->
       <div class="subtabs" role="tablist" aria-label="Photo sections">
         <button class="subtab-btn active" data-subtab="highlights" role="tab" aria-selected="true">Highlights</button>
         <button class="subtab-btn" data-subtab="stars" role="tab" aria-selected="false">Shining With The Stars</button>
       </div>
 
-      <!-- Highlights: horizontal scroll row (YOUR 5 PHOTOS) -->
+      <!-- HIGHLIGHTS (your 5 uploaded images) -->
       <div id="highlights" class="subpanel active" role="tabpanel" aria-label="Highlights gallery">
         <h3 class="sr-only">Highlights</h3>
         <div class="hlx-row">
           <div class="hlx-card">
-            <img src="assets/photos/highlights/highlight-1.JPG" alt="Jazzy B">
-            <div class="hlx-cap">Jazzy B</div>
+            <img src="assets/photos/highlights/highlight-1.JPG" alt="Jazzy B"><div class="hlx-cap">Jazzy B</div>
           </div>
-
           <div class="hlx-card">
-            <img src="assets/photos/highlights/highlight-2.jpg" alt="Garry Sandhu">
-            <div class="hlx-cap">Garry Sandhu</div>
+            <img src="assets/photos/highlights/highlight-2.jpg" alt="Garry Sandhu"><div class="hlx-cap">Garry Sandhu</div>
           </div>
-
           <div class="hlx-card">
-            <img src="assets/photos/highlights/highlight-3.jpg" alt="Raghav">
-            <div class="hlx-cap">Raghav</div>
+            <img src="assets/photos/highlights/highlight-3.jpg" alt="Raghav"><div class="hlx-cap">Raghav</div>
           </div>
-
           <div class="hlx-card">
-            <img src="assets/photos/highlights/highlight-4.JPG" alt="Babbu">
-            <div class="hlx-cap">Babbu</div>
+            <img src="assets/photos/highlights/highlight-4.JPG" alt="Babbu"><div class="hlx-cap">Babbu</div>
           </div>
-
           <div class="hlx-card">
-            <img src="assets/photos/highlights/highlight-5.jpg" alt="Surjit Khan">
-            <div class="hlx-cap">Surjit Khan</div>
+            <img src="assets/photos/highlights/highlight-5.jpg" alt="Surjit Khan"><div class="hlx-cap">Surjit Khan</div>
           </div>
         </div>
       </div>
 
-      <!-- Shining With The Stars: grid gallery (7 items) -->
+      <!-- STARS (leave paths or remove if you don’t use this) -->
       <div id="stars" class="subpanel" role="tabpanel" aria-label="Shining With The Stars gallery">
         <h3 class="sr-only">Shining With The Stars</h3>
         <div class="grid">
-          <figure class="card">
-            <img src="assets/photos/stars/stars-1.jpg" alt="Jazzy B">
-            <figcaption class="cap">Jazzy B</figcaption>
-          </figure>
-          <figure class="card">
-            <img src="assets/photos/stars/stars-2.jpg" alt="Garry Sandhu">
-            <figcaption class="cap">Garry Sandhu</figcaption>
-          </figure>
-          <figure class="card">
-            <img src="assets/photos/stars/stars-3.jpg" alt="Raghav">
-            <figcaption class="cap">Raghav</figcaption>
-          </figure>
-          <figure class="card">
-            <img src="assets/photos/stars/stars-4.jpg" alt="Babbu">
-            <figcaption class="cap">Babbu</figcaption>
-          </figure>
-          <figure class="card">
-            <img src="assets/photos/stars/stars-5.jpg" alt="Surjit Khan">
-            <figcaption class="cap">Surjit Khan</figcaption>
-          </figure>
-          <figure class="card">
-            <img src="assets/photos/stars/stars-6.jpg" alt="DJ Goddess">
-            <figcaption class="cap">DJ Goddess</figcaption>
-          </figure>
-          <figure class="card">
-            <img src="assets/photos/stars/stars-7.jpg" alt="DJ Hans">
-            <figcaption class="cap">DJ Hans</figcaption>
-          </figure>
+          <figure class="card"><img src="assets/photos/stars/stars-1.jpg" alt="Jazzy B"><figcaption class="cap">Jazzy B</figcaption></figure>
+          <figure class="card"><img src="assets/photos/stars/stars-2.jpg" alt="Garry Sandhu"><figcaption class="cap">Garry Sandhu</figcaption></figure>
+          <figure class="card"><img src="assets/photos/stars/stars-3.jpg" alt="Raghav"><figcaption class="cap">Raghav</figcaption></figure>
+          <figure class="card"><img src="assets/photos/stars/stars-4.jpg" alt="Babbu"><figcaption class="cap">Babbu</figcaption></figure>
+          <figure class="card"><img src="assets/photos/stars/stars-5.jpg" alt="Surjit Khan"><figcaption class="cap">Surjit Khan</figcaption></figure>
+          <figure class="card"><img src="assets/photos/stars/stars-6.jpg" alt="DJ Goddess"><figcaption class="cap">DJ Goddess</figcaption></figure>
+          <figure class="card"><img src="assets/photos/stars/stars-7.jpg" alt="DJ Hans"><figcaption class="cap">DJ Hans</figcaption></figure>
         </div>
       </div>
     </section>
 
-    <section id="videos" class="tab-panel" aria-labelledby="Videos">
+    <!-- VIDEOS -->
+    <section id="videos" class="tab-panel">
       <h2 class="section-title">Videos</h2>
       <p class="section-subtitle">Performance clips and event recaps coming soon.</p>
-      <div style="background:var(--card);padding:16px;border-radius:var(--radius);border:1px solid rgba(255,255,255,.06);box-shadow:var(--shadow)">
-        <p style="margin:0;color:var(--muted)">Embed your YouTube or Instagram Reels here.</p>
-      </div>
+      <div class="card" style="text-align:center;color:var(--muted)">Embed your YouTube or Instagram Reels here.</div>
     </section>
 
-    <section id="contact" class="tab-panel" aria-labelledby="Contact">
+    <!-- CONTACT -->
+    <section id="contact" class="tab-panel">
       <h2 class="section-title">Contact</h2>
       <p class="section-subtitle">Bookings & inquiries</p>
-      <div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
-        <div style="background:var(--card);padding:16px;border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.06)">
-          <h3 style="margin:0 0 8px">Email</h3>
-          <p style="margin:0;color:var(--muted)">arrjunworldwide [at] gmail [dot] com</p>
-        </div>
-        <div style="background:var(--card);padding:16px;border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.06)">
-          <h3 style="margin:0 0 8px">Instagram</h3>
-          <p style="margin:0;color:var(--muted)">@PunjabiWeddingMC</p>
-        </div>
-        <div style="background:var(--card);padding:16px;border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.06)">
-          <h3 style="margin:0 0 8px">Location</h3>
-          <p style="margin:0;color:var(--muted)">Seattle, WA — Available worldwide</p>
-        </div>
+      <div class="grid3">
+        <div class="card"><h3 style="margin:0 0 8px">Email</h3><p style="margin:0;color:var(--muted)">arrjunworldwide [at] gmail [dot] com</p></div>
+        <div class="card"><h3 style="margin:0 0 8px">Instagram</h3><p style="margin:0;color:var(--muted)">@PunjabiWeddingMC</p></div>
+        <div class="card"><h3 style="margin:0 0 8px">Location</h3><p style="margin:0;color:var(--muted)">Seattle, WA — Available worldwide</p></div>
       </div>
     </section>
   </main>
 
-  <footer>
-    © <span id="year"></span> Punjabi Wedding MC — All rights reserved.
+  <footer style="text-align:center;padding:26px 16px;border-top:2px solid var(--maroon);color:var(--maroon-dark);font-weight:700">
+    © <span id="year"></span> Punjabi Wedding MC
   </footer>
 
-  <!-- JS: Splash, Tabs, Dropdowns -->
+  <!-- ===== JS: Splash, Tabs, Dropdowns ===== -->
   <script>
     // Splash
-    const splash = document.getElementById('splash');
-    const enterBtn = document.getElementById('enterBtn');
-    enterBtn?.addEventListener('click',()=>{ splash.style.display='none'; });
+    const splash=document.getElementById('splash');
+    document.getElementById('enterBtn').addEventListener('click',()=>{ splash.style.display='none'; });
 
     // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('year').textContent=new Date().getFullYear();
 
     // Dropdown open/close
-    const dropdowns = document.querySelectorAll('.dropdown');
-    dropdowns.forEach(dd=>{
-      const btn = dd.querySelector('[data-tab="photos"]');
-      btn.addEventListener('click',(e)=>{
-        e.stopPropagation();
-        dd.classList.toggle('open');
-        btn.setAttribute('aria-expanded', dd.classList.contains('open'));
-        // also switch to Photos tab
-        activateTab('photos');
-      });
+    const dropdown=document.querySelector('.dropdown');
+    const photosBtn=dropdown.querySelector('[data-tab="photos"]');
+    photosBtn.addEventListener('click',(e)=>{
+      e.stopPropagation();
+      dropdown.classList.toggle('open');
+      photosBtn.setAttribute('aria-expanded', dropdown.classList.contains('open'));
+      activateTab('photos');
     });
-    document.addEventListener('click',()=>dropdowns.forEach(d=>d.classList.remove('open')));
+    document.addEventListener('click',()=>dropdown.classList.remove('open'));
 
     // Top-level tabs
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const panels = document.querySelectorAll('.tab-panel');
+    const tabBtns=document.querySelectorAll('.tab-btn');
+    const panels=document.querySelectorAll('.tab-panel');
     tabBtns.forEach(b=>{
-      b.addEventListener('click',(e)=>{
-        const id = b.dataset.tab;
-        if(!id) return;
+      b.addEventListener('click',()=>{
+        const id=b.dataset.tab; if(!id) return;
         activateTab(id);
       });
     });
@@ -324,26 +278,25 @@
     }
 
     // Photo sub-tabs
-    const subBtns = document.querySelectorAll('.subtab-btn');
-    const subPanels = document.querySelectorAll('.subpanel');
+    const subBtns=document.querySelectorAll('.subtab-btn');
+    const subPanels=document.querySelectorAll('.subpanel');
     subBtns.forEach(b=>{
       b.addEventListener('click',()=>{
-        const id = b.dataset.subtab;
+        const id=b.dataset.subtab;
         subBtns.forEach(x=>x.classList.toggle('active', x.dataset.subtab===id));
         subPanels.forEach(p=>p.classList.toggle('active', p.id===id));
       });
     });
 
-    // Allow submenu links to switch subtabs too
+    // Submenu links also switch subtabs
     document.querySelectorAll('.subnav-link').forEach(a=>{
       a.addEventListener('click',(e)=>{
         e.preventDefault();
-        const id = a.dataset.subtab;
+        const id=a.dataset.subtab;
         activateTab('photos');
         subBtns.forEach(x=>x.classList.toggle('active', x.dataset.subtab===id));
         subPanels.forEach(p=>p.classList.toggle('active', p.id===id));
-        // close dropdown
-        dropdowns.forEach(d=>d.classList.remove('open'));
+        dropdown.classList.remove('open');
       });
     });
   </script>
