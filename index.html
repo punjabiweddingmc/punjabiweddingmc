@@ -5,369 +5,143 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Punjabi Wedding MC</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=EB+Garamond:wght@400;500;600&family=Oswald:wght@500;700&family=Satisfy&display=swap" rel="stylesheet" />
+<!-- Optional fonts for your main page headings -->
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Satisfy&display=swap" rel="stylesheet" />
 
 <style>
-  :root{
-    --bg:#FFD300;          /* bright yellow you liked */
-    --maroon:#800000;
-    --maroon-dark:#990000;
-    --ink:#000;
-    --card:#fff;
-    --blue:#0d6efd;
-    --blue-dark:#0a58ca;
-  }
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0; background:var(--bg); color:var(--ink);
-    font-family:"EB Garamond", Garamond, "Times New Roman", serif;
-  }
+  *{margin:0;padding:0;box-sizing:border-box}
 
-  /* ======== SPLASH (full screen, yellow background) ======== */
+  /* ===== Splash (full screen) ===== */
   #splash{
-    position:fixed; inset:0; z-index:10000;
-    background:var(--bg);                     /* yellow background (no white) */
+    position:fixed; inset:0; z-index:9999;
+    background:#FFD300;                 /* bright yellow */
     display:flex; align-items:center; justify-content:center;
-    transition:opacity .6s ease, visibility 0s linear .6s;
-    opacity:1; visibility:visible;
     overflow:hidden;
+    opacity:1; transition:opacity .8s ease;
   }
-  #splash.hidden{ opacity:0; visibility:hidden; }
+  #splash.hidden{ opacity:0; pointer-events:none; }
 
-  .splash-wrap{
-    position:relative; width:100vw; height:100vh;
+  .s-wrap{ position:relative; width:100vw; height:100vh; }
+
+  /* blue watermark behind image */
+  .s-watermark{
+    position:absolute; inset:0;
     display:flex; align-items:center; justify-content:center;
+    color:#0d6efd; opacity:.18; font-weight:900;
+    font-size:clamp(42px,14vw,160px); letter-spacing:.08em;
+    white-space:nowrap; user-select:none; pointer-events:none;
   }
 
-  /* watermark behind */
-  .splash-watermark{
-    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-    font-family:"Oswald", sans-serif; font-weight:800; text-transform:uppercase;
-    color:var(--blue); opacity:.18; letter-spacing:.12em;
-    font-size:clamp(42px,14vw,160px); white-space:nowrap; z-index:1; pointer-events:none;
-  }
-
-  /* your cut-out photo centered, scales nicely, no white canvas */
-  .splash-photo{
+  /* centered transparent cut-out */
+  .s-photo{
     position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
-    width:min(86vw, 560px); height:auto; z-index:2;
-    /* keep transparent PNG edges crisp */
-    image-rendering:-webkit-optimize-contrast;
+    width:min(86vw,560px); height:auto;
+    pointer-events:none;             /* image cannot steal taps */
   }
 
-  /* CTA button */
-  .splash-cta{
+  .s-cta{
     position:absolute; left:50%; bottom:8vh; transform:translateX(-50%);
-    z-index:3; background:var(--blue); color:#fff; border:none;
-    padding:16px 32px; border-radius:12px; font-weight:800;
-    font-family:"Oswald", sans-serif; font-size:1.25rem; cursor:pointer;
-    box-shadow:0 8px 22px rgba(0,0,0,.28);
+    background:#0d6efd; color:#fff; border:none;
+    padding:14px 28px; border-radius:12px; font-size:1.25rem;
+    font-weight:800; cursor:pointer; box-shadow:0 8px 22px rgba(0,0,0,.28);
   }
-  .splash-cta:hover{ background:var(--blue-dark); }
-  .splash-cta:active{ transform:translateX(-50%) scale(.98); }
+  .s-cta:hover{ background:#0a58ca; }
+  .s-cta:active{ transform:translateX(-50%) scale(.98); }
 
-  /* audio toggle (only on splash) */
-  .audio-toggle{
-    position:fixed; top:12px; right:12px; z-index:10001;
-    background:rgba(0,0,0,.35); color:#fff; border:0; border-radius:10px;
-    padding:8px 10px; font-size:18px; line-height:1; cursor:pointer; backdrop-filter:blur(4px);
-  }
-  .audio-toggle[aria-pressed="true"]{ background:rgba(13,110,253,.85); }
-  body.reveal .audio-toggle{ display:none; }
-
-  /* ======== NAV / SITE (unchanged look) ======== */
-  .site{ opacity:0; transition:opacity .6s ease; }
-  body.reveal .site{ opacity:1; }
-
-  header{position:sticky; top:0; z-index:900; background:var(--maroon);}
-  nav{display:flex; justify-content:center;}
-  nav ul{
-    list-style:none; margin:0; padding:0;
-    display:flex; width:100%; max-width:1100px;
-    justify-content:space-evenly; align-items:center;
-  }
-  nav li{position:relative;}
-  nav > ul > li > a{
-    display:inline-block; padding:12px 18px; border-radius:8px;
-    color:#fff; text-decoration:none; font-weight:700; font-family:"Oswald", sans-serif;
-  }
-  nav > ul > li:hover{ background:var(--maroon-dark); border-radius:8px; }
-
-  /* dropdowns */
-  nav ul li ul{
-    display:none; position:absolute; top:100%; left:0;
-    min-width:200px; background:#fff; border-radius:10px;
-    box-shadow:0 8px 20px rgba(0,0,0,.15); padding:8px; z-index:1001;
-  }
-  nav ul li:hover ul, nav ul li:focus-within ul{ display:block; }
-  nav ul li ul li a{
-    display:block; padding:10px 12px; border-radius:8px;
-    color:var(--maroon); text-decoration:none; font-weight:600;
-    font-family:"EB Garamond", Garamond, serif;
-  }
-  nav ul li ul li a:hover{ background:#f3f3f3; }
-
-  .wrap{max-width:1000px; margin:0 auto; padding:24px 18px; text-align:center;}
-  .logo{max-width:320px; width:90%; height:auto; margin:22px auto; display:block;}
-
-  /* keep your welcome fonts EXACTLY as before */
-  h1.welcome{margin:10px 0 6px; line-height:1.15; font-size:36px; font-family:"Raleway", sans-serif;}
-  h2.brand{margin:0; font-size:42px; line-height:1.1; font-family:"Satisfy", cursive; white-space:nowrap;}
-
-  section{padding:40px 0;}
-  section h2{font-family:"Oswald", sans-serif; font-size:28px; margin:0 0 14px;}
-  section p{max-width:760px; margin:0 auto 14px;}
-
-  .gallery{
-    display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    max-width:960px; margin:18px auto 0; padding:0 12px;
-  }
-  .ph{background:#fff; border-radius:10px; padding:40px 10px; box-shadow:0 2px 8px rgba(0,0,0,.08); font-weight:600;}
-
-  .cards{
-    display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-    max-width:960px; margin:12px auto 0; padding:0 12px;
-  }
-  .card{background:#fff; border-radius:12px; padding:16px; text-align:left; box-shadow:0 2px 10px rgba(0,0,0,.08);}
-  .card h3{margin:0 0 8px; color:var(--maroon); font-family:"Oswald", sans-serif;}
-  .card p{margin:0;}
-
-  .note{background:#fff; border-left:6px solid var(--maroon); margin:14px auto; max-width:820px; padding:16px; border-radius:10px; text-align:left;}
-  .btn{display:inline-block; margin-top:16px; padding:12px 26px; color:#fff; background:var(--maroon); border-radius:8px; text-decoration:none; font-weight:700; font-family:"Oswald", sans-serif;}
-  .btn:hover{ background:var(--maroon-dark); }
-
-  .contact{background:#fff; max-width:680px; margin:0 auto; padding:18px; border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,.08);}
-
-  .bio{max-width:800px; margin:20px auto; font-size:1.1em; line-height:1.6; color:#000; text-align:justify;}
-
-  .profile{
-    position:fixed; bottom:20px; left:20px;
-    display:flex; align-items:center; gap:10px;
-    background:#fff; padding:10px 12px; border-radius:12px;
-    box-shadow:0 4px 16px rgba(0,0,0,.15); z-index:10;
-  }
-  .profile img{width:64px; height:64px; border-radius:50%; object-fit:cover; border:2px solid var(--maroon);}
-  .profile .name{margin:0; font-weight:800;}
-  .profile .title{margin:2px 0 0; color:#666; font-size:13px;}
-
-  @media (max-width:560px){
-    h1.welcome{font-size:30px;}
-    h2.brand{font-size:34px;}
-  }
+  /* ===== Main site (simple demo) ===== */
+  #main{ display:none; background:#FFD300; min-height:100vh; }
+  nav{ background:#800000; padding:10px; text-align:center; }
+  nav a{ color:#fff; text-decoration:none; margin:0 14px; font-weight:700; }
+  .wrap{ max-width:950px; margin:0 auto; padding:24px; }
+  h1{ font-family:"Raleway", system-ui, sans-serif; margin-bottom:6px; }
+  h2{ font-family:"Satisfy", cursive; font-size:2rem; margin-bottom:14px; }
+  p{ line-height:1.6; }
 </style>
 </head>
 <body>
 
-<!-- ============== SPLASH ============== -->
+<!-- ========== Splash ========== -->
 <div id="splash" aria-modal="true" role="dialog" aria-label="Welcome">
-  <div class="splash-wrap">
-    <div class="splash-watermark">#1 ENTERTAINER</div>
-    <img class="splash-photo" src="splash.png" alt="Arrjun Singh">
-    <button id="enterBtn" class="splash-cta">Enter the Website</button>
+  <div class="s-wrap">
+    <div class="s-watermark">#1 ENTERTAINER</div>
+    <img class="s-photo" src="splash.png" alt="Arrjun Singh">
+    <button id="enterBtn" class="s-cta" type="button">Enter the Website</button>
+    <audio id="splashAudio" src="splash.mp3" preload="auto"></audio>
   </div>
 </div>
 
-<!-- Splash audio + toggle -->
-<audio id="splashAudio" src="splash.mp3" preload="auto"></audio>
-<button id="audioToggle" class="audio-toggle" aria-pressed="true" aria-label="Toggle splash sound">🔊</button>
-
-<!-- ============== SITE ============== -->
-<div class="site">
-  <header>
-    <nav aria-label="Main">
-      <ul>
-        <li tabindex="0">
-          <a href="#home">Home</a>
-          <ul>
-            <li><a href="#photos">Photos</a></li>
-            <li><a href="#videos">Videos</a></li>
-          </ul>
-        </li>
-        <li tabindex="0">
-          <a href="#services">Services</a>
-          <ul>
-            <li><a href="#svc-mc">MC / Host</a></li>
-            <li><a href="#svc-dhol">Dhol &amp; Drums</a></li>
-            <li><a href="#svc-content">Content Creation</a></li>
-          </ul>
-        </li>
-        <li tabindex="0">
-          <a href="#pricing">Pricing</a>
-          <ul>
-            <li><a href="#pricing-info">Packages / Note</a></li>
-            <li><a href="mailto:Punjabiweddingmc@gmail.com?subject=Booking%20Inquiry%20-%20Punjabi%20Wedding%20MC">Book Now</a></li>
-          </ul>
-        </li>
-        <li tabindex="0">
-          <a href="#contact">Contact Us</a>
-          <ul>
-            <li><a href="mailto:Punjabiweddingmc@gmail.com">Email</a></li>
-            <li><a href="tel:+14402665763">Phone</a></li>
-            <li><a href="https://instagram.com/punjabiweddingmc" target="_blank" rel="noopener">Instagram</a></li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- HERO -->
-  <div id="home" class="wrap">
-    <img src="Logo.png" alt="Punjabi Wedding MC Logo" class="logo"/>
-    <h1 class="welcome">Welcome to</h1>
-    <h2 class="brand">Punjabi Wedding MC</h2>
-    <a class="btn" href="mailto:Punjabiweddingmc@gmail.com?subject=Booking%20Inquiry%20-%20Punjabi%20Wedding%20MC">Book Now</a>
-
-    <p class="bio">
-      I’m <strong>Arrjun Singh</strong>, one of the top entertainers in the Pacific Northwest and across the United States, known for turning every celebration into an unforgettable experience.
-      My passion for performance has taken me to international destinations including <strong>Mexico, Sri Lanka, Canada, and India</strong>, where I’ve brought energy, culture, and joy to weddings and special events.
-      <br><br>
-      Beyond the stage, I’m a <strong>singer-songwriter</strong> with over <strong>20 singles</strong> on Apple Music and Spotify, as well as one album and one EP.
-      I’m also the host of the <strong>Growing with Arrjun</strong> audio-video podcast on YouTube and Spotify, where I share stories and insights to inspire others.
-      <br><br>
-      Whether it’s MC’ing your big day, playing the dhol, creating captivating content, or simply making every moment memorable,
-      my mission is to make your event <strong>bigger, better, and truly unforgettable</strong>.
+<!-- ========== Main site (example content) ========== -->
+<div id="main">
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Services</a>
+    <a href="#">Pricing</a>
+    <a href="#">Contact Us</a>
+  </nav>
+  <div class="wrap">
+    <h1>Welcome to</h1>
+    <h2>Punjabi Wedding MC</h2>
+    <p>
+      My name is Arrjun Singh, one of the top entertainers in the Pacific Northwest and United States.
+      I’ve performed internationally in Mexico, Sri Lanka, Canada, and India. I’m also a singer-songwriter
+      with over 20 singles, one album, and one EP on Apple Music and Spotify, and I host the
+      audio/video podcast <em>Growing with Arrjun</em> on YouTube and Spotify.
     </p>
   </div>
-
-  <!-- HOME → PHOTOS -->
-  <section id="photos" aria-labelledby="photos-title">
-    <div class="wrap">
-      <h2 id="photos-title">Photos</h2>
-      <p>Highlights from receptions, baraats, and sangeets. (Replace placeholders with your images.)</p>
-      <div class="gallery">
-        <div class="ph">Add Photo 1</div>
-        <div class="ph">Add Photo 2</div>
-        <div class="ph">Add Photo 3</div>
-        <div class="ph">Add Photo 4</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- HOME → VIDEOS -->
-  <section id="videos" aria-labelledby="videos-title">
-    <div class="wrap">
-      <h2 id="videos-title">Videos</h2>
-      <p>Feature your best reels or YouTube embeds here.</p>
-      <div class="gallery">
-        <div class="ph">Add Video 1 (thumbnail)</div>
-        <div class="ph">Add Video 2 (thumbnail)</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVICES -->
-  <section id="services" aria-labelledby="services-title">
-    <div class="wrap">
-      <h2 id="services-title">Services</h2>
-      <div class="cards">
-        <div id="svc-mc" class="card">
-          <h3>MC / Host</h3>
-          <p>High-energy hosting, crowd engagement, bilingual announcements, and seamless flow for your event.</p>
-        </div>
-        <div id="svc-dhol" class="card">
-          <h3>Dhol &amp; Drums</h3>
-          <p>Traditional dhol with modern rhythms to power baraats, entrances, and dance floors.</p>
-        </div>
-        <div id="svc-content" class="card">
-          <h3>Content Creation</h3>
-          <p>Reels, highlights, and social-ready clips — captured and edited for shareability.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRICING -->
-  <section id="pricing" aria-labelledby="pricing-title">
-    <div class="wrap">
-      <h2 id="pricing-title">Pricing</h2>
-      <div id="pricing-info" class="note">
-        We cater to you according to your needs, making sure you are satisfied.
-        Please email us your <strong>dates</strong>, <strong>location</strong>, <strong>timing</strong>, and the <strong>services</strong> you need.
-        We will get back to you within <strong>48 hours</strong>.
-      </div>
-      <a class="btn" href="mailto:Punjabiweddingmc@gmail.com?subject=Booking%20Inquiry%20-%20Punjabi%20Wedding%20MC">Book Now</a>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact" aria-labelledby="contact-title">
-    <div class="wrap">
-      <h2 id="contact-title">Contact Us</h2>
-      <div class="contact">
-        <p><strong>Email:</strong> <a href="mailto:Punjabiweddingmc@gmail.com">Punjabiweddingmc@gmail.com</a></p>
-        <p><strong>Phone:</strong> <a href="tel:+14402665763">440-266-5763</a></p>
-        <p><strong>Instagram:</strong> <a href="https://instagram.com/punjabiweddingmc" target="_blank" rel="noopener">@punjabiweddingmc</a></p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Founder badge -->
-  <div class="profile" aria-label="Founder">
-    <img src="founder.jpg" alt="Arrjun Singh"/>
-    <div>
-      <p class="name">ARRJUN SINGH</p>
-      <p class="title">CEO, Founder</p>
-    </div>
-  </div>
 </div>
 
-<!-- ===== JS: loop audio during splash, fade out on enter ===== -->
 <script>
   (function(){
     const splash = document.getElementById('splash');
-    const enterBtn = document.getElementById('enterBtn');
+    const main = document.getElementById('main');
+    const btn = document.getElementById('enterBtn');
     const audio = document.getElementById('splashAudio');
-    const toggle = document.getElementById('audioToggle');
 
-    // If user already entered, skip splash
-    if (sessionStorage.getItem('enteredSite') === '1') {
-      splash.classList.add('hidden');
-      document.body.classList.add('reveal');
-    } else {
-      tryPlayAudio(); // start audio on load (mobile fallback inside)
-    }
-
-    let soundOn = true;
-    function tryPlayAudio(){
-      if (!soundOn) return;
+    // Start looping audio while the splash is visible
+    function startAudio(){
+      audio.currentTime = 0;
+      audio.loop = true;
       audio.volume = 1;
-      audio.loop = true;  // loop while splash visible
       audio.play().catch(() => {
-        const kick = () => { if (soundOn) { audio.loop = true; audio.play().catch(()=>{});} document.removeEventListener('click', kick); };
+        // If autoplay is blocked on mobile, start on the first user interaction
+        const kick = () => { audio.play().catch(()=>{}); document.removeEventListener('touchstart', kick); document.removeEventListener('click', kick); };
+        document.addEventListener('touchstart', kick, { once:true });
         document.addEventListener('click', kick, { once:true });
       });
     }
+    // Begin on load
+    window.addEventListener('load', startAudio);
 
-    toggle.addEventListener('click', () => {
-      soundOn = !soundOn;
-      toggle.setAttribute('aria-pressed', soundOn ? 'true' : 'false');
-      if (soundOn) tryPlayAudio(); else { audio.pause(); audio.currentTime = 0; }
-    });
-
-    function fadeOutAudio(){
-      if (!audio.paused){
-        const step = 0.07;
-        const iv = setInterval(()=>{
-          audio.volume = Math.max(0, audio.volume - step);
-          if (audio.volume <= 0.05){
-            clearInterval(iv);
-            audio.pause();
-            audio.volume = 1;
-          }
-        }, 60);
-      }
+    // Fade the audio out smoothly
+    function fadeOutAudio(ms = 700){
+      if (audio.paused) return;
+      const steps = 14;              // ~50ms per step
+      const stepTime = Math.max(20, Math.floor(ms/steps));
+      let i = 0;
+      const iv = setInterval(()=>{
+        i++;
+        audio.volume = Math.max(0, 1 - (i/steps));
+        if (i >= steps){
+          clearInterval(iv);
+          audio.pause();
+          audio.volume = 1;          // reset for next time
+        }
+      }, stepTime);
     }
 
-    function enterSite(e){
-      if (e) e.preventDefault();
+    function enterSite(){
+      // fade UI + audio, then reveal main
       splash.classList.add('hidden');
-      document.body.classList.add('reveal');
-      sessionStorage.setItem('enteredSite','1');
-      fadeOutAudio();
+      fadeOutAudio(700);
+      setTimeout(()=>{
+        splash.style.display = 'none';
+        main.style.display = 'block';
+      }, 800);
     }
 
-    enterBtn.addEventListener('click', enterSite, {passive:false});
-    document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') enterSite(e); });
+    // Button works, and tapping anywhere on splash (except the button itself)
+    btn.addEventListener('click', (e)=>{ e.stopPropagation(); enterSite(); });
+    splash.addEventListener('click', (e)=>{ if (e.target !== btn) enterSite(); });
   })();
 </script>
 
