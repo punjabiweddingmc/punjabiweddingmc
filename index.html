@@ -5,62 +5,64 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Punjabi Wedding MC</title>
 
-<!-- Optional fonts for your main page headings -->
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Satisfy&display=swap" rel="stylesheet" />
 
 <style>
-  *{margin:0;padding:0;box-sizing:border-box}
+  * { margin:0; padding:0; box-sizing:border-box; }
 
-  /* ===== Splash (full screen) ===== */
-  #splash{
+  /* ===== Splash Screen ===== */
+  #splash {
     position:fixed; inset:0; z-index:9999;
-    background:#FFD300;                 /* bright yellow */
+    background:#FFD300; /* bright yellow */
     display:flex; align-items:center; justify-content:center;
     overflow:hidden;
     opacity:1; transition:opacity .8s ease;
   }
-  #splash.hidden{ opacity:0; pointer-events:none; }
+  #splash.hidden { opacity:0; pointer-events:none; }
 
-  .s-wrap{ position:relative; width:100vw; height:100vh; }
+  .s-wrap { position:relative; width:100vw; height:100vh; }
 
-  /* blue watermark behind image */
-  .s-watermark{
+  /* Watermark text */
+  .s-watermark {
     position:absolute; inset:0;
     display:flex; align-items:center; justify-content:center;
     color:#0d6efd; opacity:.18; font-weight:900;
-    font-size:clamp(42px,14vw,160px); letter-spacing:.08em;
-    white-space:nowrap; user-select:none; pointer-events:none;
+    font-size:clamp(28px,10vw,90px); /* smaller and responsive */
+    letter-spacing:.08em; white-space:nowrap;
+    user-select:none; pointer-events:none;
+    text-align:center;
   }
 
-  /* centered transparent cut-out */
-  .s-photo{
+  /* Splash Image */
+  .s-photo {
     position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
-    width:min(86vw,560px); height:auto;
-    pointer-events:none;             /* image cannot steal taps */
+    width:min(80vw,500px); height:auto;
+    pointer-events:none;
   }
 
-  .s-cta{
+  /* Button */
+  .s-cta {
     position:absolute; left:50%; bottom:8vh; transform:translateX(-50%);
     background:#0d6efd; color:#fff; border:none;
     padding:14px 28px; border-radius:12px; font-size:1.25rem;
     font-weight:800; cursor:pointer; box-shadow:0 8px 22px rgba(0,0,0,.28);
   }
-  .s-cta:hover{ background:#0a58ca; }
-  .s-cta:active{ transform:translateX(-50%) scale(.98); }
+  .s-cta:hover { background:#0a58ca; }
+  .s-cta:active { transform:translateX(-50%) scale(.98); }
 
-  /* ===== Main site (simple demo) ===== */
-  #main{ display:none; background:#FFD300; min-height:100vh; }
-  nav{ background:#800000; padding:10px; text-align:center; }
-  nav a{ color:#fff; text-decoration:none; margin:0 14px; font-weight:700; }
-  .wrap{ max-width:950px; margin:0 auto; padding:24px; }
-  h1{ font-family:"Raleway", system-ui, sans-serif; margin-bottom:6px; }
-  h2{ font-family:"Satisfy", cursive; font-size:2rem; margin-bottom:14px; }
-  p{ line-height:1.6; }
+  /* ===== Main site ===== */
+  #main { display:none; background:#FFD300; min-height:100vh; }
+  nav { background:#800000; padding:10px; text-align:center; }
+  nav a { color:#fff; text-decoration:none; margin:0 14px; font-weight:700; }
+  .wrap { max-width:950px; margin:0 auto; padding:24px; }
+  h1 { font-family:"Raleway", sans-serif; margin-bottom:6px; }
+  h2 { font-family:"Satisfy", cursive; font-size:2rem; margin-bottom:14px; }
+  p { line-height:1.6; }
 </style>
 </head>
 <body>
 
-<!-- ========== Splash ========== -->
+<!-- ===== Splash ===== -->
 <div id="splash" aria-modal="true" role="dialog" aria-label="Welcome">
   <div class="s-wrap">
     <div class="s-watermark">#1 ENTERTAINER</div>
@@ -70,7 +72,7 @@
   </div>
 </div>
 
-<!-- ========== Main site (example content) ========== -->
+<!-- ===== Main content ===== -->
 <div id="main">
   <nav>
     <a href="#">Home</a>
@@ -91,58 +93,60 @@
 </div>
 
 <script>
-  (function(){
-    const splash = document.getElementById('splash');
-    const main = document.getElementById('main');
-    const btn = document.getElementById('enterBtn');
-    const audio = document.getElementById('splashAudio');
+(function(){
+  const splash = document.getElementById('splash');
+  const main = document.getElementById('main');
+  const btn = document.getElementById('enterBtn');
+  const audio = document.getElementById('splashAudio');
 
-    // Start looping audio while the splash is visible
-    function startAudio(){
-      audio.currentTime = 0;
-      audio.loop = true;
-      audio.volume = 1;
-      audio.play().catch(() => {
-        // If autoplay is blocked on mobile, start on the first user interaction
-        const kick = () => { audio.play().catch(()=>{}); document.removeEventListener('touchstart', kick); document.removeEventListener('click', kick); };
-        document.addEventListener('touchstart', kick, { once:true });
-        document.addEventListener('click', kick, { once:true });
-      });
-    }
-    // Begin on load
-    window.addEventListener('load', startAudio);
+  // Start looping audio only while splash is visible
+  function startAudio(){
+    audio.currentTime = 0;
+    audio.loop = true;
+    audio.volume = 1;
+    audio.play().catch(() => {
+      // If autoplay blocked, start on first tap
+      const kick = () => { audio.play().catch(()=>{}); cleanup(); };
+      const cleanup = () => {
+        document.removeEventListener('touchstart', kick);
+        document.removeEventListener('click', kick);
+      };
+      document.addEventListener('touchstart', kick, { once:true });
+      document.addEventListener('click', kick, { once:true });
+    });
+  }
+  window.addEventListener('load', startAudio);
 
-    // Fade the audio out smoothly
-    function fadeOutAudio(ms = 700){
-      if (audio.paused) return;
-      const steps = 14;              // ~50ms per step
-      const stepTime = Math.max(20, Math.floor(ms/steps));
-      let i = 0;
-      const iv = setInterval(()=>{
-        i++;
-        audio.volume = Math.max(0, 1 - (i/steps));
-        if (i >= steps){
-          clearInterval(iv);
-          audio.pause();
-          audio.volume = 1;          // reset for next time
-        }
-      }, stepTime);
-    }
+  // Fade audio out
+  function fadeOutAudio(ms = 700){
+    if (audio.paused) return;
+    const steps = 14;
+    const stepTime = Math.max(20, Math.floor(ms/steps));
+    let i = 0;
+    const iv = setInterval(()=>{
+      i++;
+      audio.volume = Math.max(0, 1 - (i/steps));
+      if (i >= steps){
+        clearInterval(iv);
+        audio.pause();
+        audio.volume = 1;
+      }
+    }, stepTime);
+  }
 
-    function enterSite(){
-      // fade UI + audio, then reveal main
-      splash.classList.add('hidden');
-      fadeOutAudio(700);
-      setTimeout(()=>{
-        splash.style.display = 'none';
-        main.style.display = 'block';
-      }, 800);
-    }
+  function enterSite(){
+    splash.classList.add('hidden');
+    fadeOutAudio(700);
+    setTimeout(()=>{
+      splash.style.display = 'none';
+      main.style.display = 'block';
+    }, 800);
+  }
 
-    // Button works, and tapping anywhere on splash (except the button itself)
-    btn.addEventListener('click', (e)=>{ e.stopPropagation(); enterSite(); });
-    splash.addEventListener('click', (e)=>{ if (e.target !== btn) enterSite(); });
-  })();
+  btn.addEventListener('click', (e)=>{ e.stopPropagation(); enterSite(); });
+  splash.addEventListener('click', (e)=>{ if (e.target !== btn) enterSite(); });
+
+})();
 </script>
 
 </body>
