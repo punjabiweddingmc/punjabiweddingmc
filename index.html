@@ -1,251 +1,458 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Punjabi Wedding MC</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Punjabi Wedding MC</title>
 
-  <!-- Poster-ish caption font (fallback to system if blocked) -->
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Oswald:wght@500;700&family=EB+Garamond:wght@400;500;600&family=Satisfy&display=swap" rel="stylesheet" />
+<!-- Poster-style font for Stars captions -->
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
 
-  <style>
-    /* ===== THEME (GOLD/YELLOW + MAROON) ===== */
-    :root{
-      --bg:#FFD200;           /* page background */
-      --text:#111;            /* main text */
-      --muted:#4a3d00;        /* secondary text */
-      --maroon:#7A0E0E;       /* header + buttons */
-      --maroon-dark:#5F0B0B;  /* hover */
-      --card:#fff;            /* white cards */
-      --shadow:0 8px 24px rgba(0,0,0,.15);
-      --radius:18px;
-      --maxw:1100px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
-    img{max-width:100%;display:block}
+<style>
+  :root{
+    --bg:#FFD300;             /* bright/warm yellow */
+    --maroon:#800000;
+    --maroon-dark:#990000;
+    --ink:#000;
+    --white:#fff;
+    --blue:#0d6efd;
+    --blue-dark:#0a58ca;
+    --shadow:0 8px 22px rgba(0,0,0,.25);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"EB Garamond", Garamond, "Times New Roman", serif;
+  }
 
-    /* ===== SPLASH ===== */
-    .splash{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:1000}
-    .splash-card{background:var(--card);padding:28px 24px;border-radius:var(--radius);box-shadow:var(--shadow);max-width:520px;width:88%;text-align:center;border:2px solid var(--maroon)}
-    .brand{font-weight:900;letter-spacing:.5px;font-size:28px;margin:0 0 6px;color:var(--maroon)}
-    .tag{color:var(--muted);margin:0 0 18px}
-    .btn{appearance:none;border:0;border-radius:999px;background:var(--maroon);color:#fff;font-weight:800;letter-spacing:.4px;padding:12px 18px;cursor:pointer}
-    .btn:hover{background:var(--maroon-dark)}
-    .splash.hide{opacity:0;visibility:hidden;transition:opacity .35s ease,visibility .35s ease}
+  /* ============ SPLASH (full cover) ============ */
+  #splash{
+    position:fixed; inset:0; z-index:9999;
+    background:var(--bg);
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden; opacity:1;
+    transition:opacity .75s ease, visibility 0s linear .75s;
+    visibility:visible;
+  }
+  #splash.hidden{opacity:0; visibility:hidden}
 
-    /* ===== HEADER / NAV ===== */
-    header{position:sticky;top:0;z-index:900;background:var(--maroon);color:#fff}
-    .nav{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
-    .nav-title{font-weight:900;letter-spacing:.6px}
-    .menu{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-    .menu a,.menu button{color:#fff;text-decoration:none;padding:8px 12px;border-radius:12px;border:1px solid transparent;background:transparent;cursor:pointer}
-    .menu a:hover,.menu button:hover{background:rgba(255,255,255,.12)}
-    .tab-btn.active{background:#F2C100;color:#000;border-color:#F2C100}
-    .dropdown{position:relative}
-    .dropdown-menu{position:absolute;top:100%;left:0;background:#fff;color:var(--text);border-radius:12px;border:1px solid rgba(0,0,0,.08);box-shadow:var(--shadow);display:none;min-width:200px;overflow:hidden}
-    .dropdown-menu a{display:block;color:var(--text);padding:10px 12px;text-decoration:none;border-bottom:1px solid rgba(0,0,0,.06)}
-    .dropdown-menu a:last-child{border-bottom:0}
-    .dropdown.open .dropdown-menu{display:block}
+  .s-wrap{position:relative; width:100vw; height:100vh}
+  .s-watermark{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-family:"Oswald", sans-serif; font-weight:900; text-transform:uppercase;
+    color:var(--blue); opacity:.18; letter-spacing:.08em;
+    font-size:clamp(28px,10vw,90px); white-space:nowrap; pointer-events:none;
+  }
+  .s-photo{
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+    width:min(80vw,500px); height:auto; pointer-events:none;
+  }
+  .s-cta{
+    position:absolute; left:50%; bottom:8vh; transform:translateX(-50%);
+    background:var(--blue); color:#fff; border:0; border-radius:12px;
+    padding:14px 28px; font-family:"Oswald", sans-serif; font-weight:800; font-size:1.15rem;
+    box-shadow:var(--shadow); cursor:pointer;
+  }
+  .s-cta:hover{background:var(--blue-dark)}
+  .s-cta:active{transform:translateX(-50%) scale(.98)}
 
-    /* ===== LAYOUT ===== */
-    main{max-width:var(--maxw);margin:22px auto;padding:0 16px 80px}
-    .section-title{font-size:34px;letter-spacing:.5px;margin:0 0 6px}
-    .section-subtitle{color:var(--muted);margin:0 0 18px}
-    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(0,0,0,.06);padding:16px}
-    .grid3{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-    .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  /* ============ SITE LAYOUT ============ */
+  .site{opacity:0; transition:opacity .6s ease}
+  body.reveal .site{opacity:1}
 
-    /* ===== PHOTOS SUB-TABS ===== */
-    .subtabs{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 16px}
-    .subtab-btn{padding:8px 12px;border-radius:999px;border:2px solid var(--maroon);background:var(--maroon);color:#fff;cursor:pointer;font-weight:700}
-    .subtab-btn:hover{background:var(--maroon-dark);border-color:var(--maroon-dark)}
-    .subtab-btn.active{background:#fff;color:var(--maroon)}
-    .subpanel{display:none}
-    .subpanel.active{display:block}
+  /* Sticky header with dropdowns */
+  header{
+    position:sticky; top:0; z-index:1200; background:var(--maroon);
+    box-shadow:0 2px 10px rgba(0,0,0,.15);
+  }
+  nav{max-width:1100px; margin:0 auto}
+  .menu{
+    display:flex; align-items:center; justify-content:space-evenly;
+    list-style:none; margin:0; padding:10px 8px;
+  }
+  .menu > li{position:relative}
+  .menu > li > button,
+  .menu > li > a{
+    background:transparent; border:0; color:#fff; font-family:"Oswald", sans-serif;
+    font-weight:700; font-size:1.05rem; padding:10px 16px; border-radius:8px; cursor:pointer;
+  }
+  .menu > li:hover > button,
+  .menu > li:hover > a,
+  .menu > li.open > button{ background:var(--maroon-dark) }
 
-    /* ===== HIGHLIGHTS (HORIZONTAL SCROLL) ===== */
-    #highlights .hlx-row{display:flex;gap:18px;overflow-x:auto;padding:8px 6px 14px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
-    #highlights .hlx-row::-webkit-scrollbar{height:8px}
-    #highlights .hlx-row::-webkit-scrollbar-thumb{background:var(--maroon);border-radius:999px}
-    #highlights .hlx-card{flex:0 0 auto;min-width:240px;max-width:280px;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);scroll-snap-align:start;overflow:hidden;border:1px solid rgba(0,0,0,.06)}
-    #highlights .hlx-card img{width:100%;height:200px;object-fit:cover}
-    #highlights .hlx-cap{font-family:"Bebas Neue",Impact,system-ui,sans-serif;font-size:1.4rem;letter-spacing:.4px;text-align:center;padding:10px 12px;line-height:1;color:var(--text)}
+  /* Dropdown panel */
+  .dropdown{
+    position:absolute; left:50%; transform:translateX(-50%);
+    top:100%; min-width:220px; background:#fff; border-radius:12px;
+    box-shadow:0 10px 26px rgba(0,0,0,.18); padding:8px; display:none; z-index:1300;
+  }
+  .menu > li.open .dropdown{ display:block }
+  .dropdown a{
+    display:block; padding:10px 12px; border-radius:8px; color:var(--maroon);
+    text-decoration:none; font-weight:600; font-family:"EB Garamond", serif;
+  }
+  .dropdown a:hover{ background:#f3f3f3 }
 
-    /* ===== STARS (GRID) ===== */
-    #stars .grid{--min:220px;display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(var(--min),1fr))}
-    #stars .card{overflow:hidden}
-    #stars .card img{width:100%;aspect-ratio:1/1;object-fit:cover}
-    #stars .cap{font-family:"Bebas Neue",Impact,system-ui,sans-serif;text-align:center;font-weight:800;letter-spacing:.4px;padding:10px 12px;color:var(--text)}
+  /* Content wrappers */
+  .wrap{max-width:1000px; margin:0 auto; padding:22px 18px; text-align:center}
+  .logo{max-width:320px; width:90%; height:auto; margin:18px auto 10px; display:block}
 
-    @media (max-width:520px){
-      #highlights .hlx-card{min-width:200px;max-width:220px}
-      #highlights .hlx-card img{height:170px}
-    }
-  </style>
+  /* Hero fonts exactly as requested */
+  h1.welcome{margin:10px 0 6px; line-height:1.15; font-size:36px; font-family:"Raleway", sans-serif}
+  h2.brand{margin:0; font-size:42px; line-height:1.1; font-family:"Satisfy", cursive; white-space:nowrap}
+
+  .btn{display:inline-block; margin-top:16px; padding:12px 26px; color:#fff; background:var(--maroon); border-radius:8px; text-decoration:none; font-weight:700; font-family:"Oswald", sans-serif}
+  .btn:hover{ background:var(--maroon-dark) }
+
+  section{padding:40px 0}
+  section h2{font-family:"Oswald", sans-serif; font-size:28px; margin:0 0 14px}
+  section p{max-width:760px; margin:0 auto 14px}
+
+  .gallery{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); max-width:960px; margin:18px auto 0; padding:0 12px}
+  .ph{background:#fff; border-radius:10px; padding:40px 10px; box-shadow:0 2px 8px rgba(0,0,0,.08); font-weight:600}
+
+  .cards{display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); max-width:960px; margin:12px auto 0; padding:0 12px}
+  .card{background:#fff; border-radius:12px; padding:16px; text-align:left; box-shadow:0 2px 10px rgba(0,0,0,.08)}
+  .card h3{margin:0 0 8px; color:var(--maroon); font-family:"Oswald", sans-serif}
+  .card p{margin:0}
+
+  .note{background:#fff; border-left:6px solid var(--maroon); margin:14px auto; max-width:820px; padding:16px; border-radius:10px; text-align:left}
+
+  .contact{background:#fff; max-width:680px; margin:0 auto; padding:18px; border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,.08)}
+
+  .bio{max-width:800px; margin:20px auto; font-size:1.1em; line-height:1.6; color:#000; text-align:justify}
+
+  /* Founder badge (fixed) */
+  .profile{
+    position:fixed; bottom:20px; left:20px; z-index:100;
+    display:flex; align-items:center; gap:10px; background:#fff; padding:10px 12px; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,.15)
+  }
+  .profile img{width:64px; height:64px; border-radius:50%; object-fit:cover; border:2px solid var(--maroon)}
+  .profile .name{margin:0; font-weight:800}
+  .profile .title{margin:2px 0 0; color:#666; font-size:13px}
+
+  @media (max-width:560px){
+    h1.welcome{font-size:30px}
+    h2.brand{font-size:34px}
+  }
+
+  /* ---- Photos tabs + Stars grid + captions + lightbox ---- */
+  .tabs {
+    display:flex; gap:10px; justify-content:center; margin:10px 0 18px;
+  }
+  .tab-btn {
+    background: var(--maroon); color:#fff; border:0; border-radius:8px;
+    padding:8px 14px; font-family:"Oswald", sans-serif; font-weight:700; cursor:pointer;
+  }
+  .tab-btn[aria-selected="true"]{ background:var(--maroon-dark); }
+  .tab-pane{ display:none; }
+  .tab-pane.active{ display:block; }
+
+  .stars-grid{
+    display:grid; gap:12px;
+    grid-template-columns: repeat(3, 1fr);
+    max-width:960px; margin:18px auto 0; padding:0 12px;
+  }
+  @media (max-width:900px){ .stars-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:520px){ .stars-grid{ grid-template-columns:1fr; } }
+  .stars-grid figure{background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,.08); margin:0}
+  .stars-grid img{width:100%; height:240px; object-fit:cover; display:block; cursor:pointer; background:#fff;}
+  .stars-grid figcaption{
+    padding:10px; text-align:center; font-family:"Bebas Neue", sans-serif;
+    font-size:20px; letter-spacing:.5px; color:#000;
+  }
+
+  .lb-backdrop{
+    position:fixed; inset:0; background:rgba(0,0,0,.85); display:none;
+    align-items:center; justify-content:center; z-index:1500;
+  }
+  .lb-backdrop.show{ display:flex; }
+  .lb-backdrop img{
+    max-width:92vw; max-height:92vh; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,.5);
+  }
+</style>
 </head>
 <body>
 
-  <!-- ===== SPLASH ===== -->
-  <div class="splash" id="splash">
-    <div class="splash-card">
-      <h1 class="brand">Punjabi Wedding MC</h1>
-      <p class="tag">MC • Dhol • Live Performances</p>
-      <button class="btn" id="enterBtn">Enter Website</button>
-    </div>
+<!-- ================== SPLASH ================== -->
+<div id="splash" aria-modal="true" role="dialog" aria-label="Welcome">
+  <div class="s-wrap">
+    <div class="s-watermark">#1 ENTERTAINER</div>
+    <img class="s-photo" src="splash.png" alt="Arrjun Singh">
+    <button id="enterBtn" class="s-cta" type="button">Enter the Website</button>
+    <audio id="splashAudio" src="splash.mp3" preload="auto"></audio>
   </div>
+</div>
 
-  <!-- ===== HEADER ===== -->
+<!-- ================== SITE ================== -->
+<div class="site" id="site">
   <header>
-    <nav class="nav" aria-label="Main">
-      <div class="nav-title">Punjabi Wedding MC</div>
-      <div class="menu">
-        <button class="tab-btn active" data-tab="home">Home</button>
-
-        <div class="dropdown">
-          <button class="tab-btn" data-tab="photos" aria-haspopup="true" aria-expanded="false">Photos ▾</button>
-          <div class="dropdown-menu" role="menu" aria-label="Photos submenu">
-            <a href="#" role="menuitem" class="subnav-link" data-subtab="highlights">Highlights</a>
-            <a href="#" role="menuitem" class="subnav-link" data-subtab="stars">Shining With The Stars</a>
+    <nav aria-label="Main">
+      <ul class="menu" id="menu">
+        <li>
+          <button type="button" aria-haspopup="true" aria-expanded="false">Home</button>
+          <div class="dropdown" role="menu">
+            <a href="#photos" role="menuitem">Photos</a>
+            <a href="#videos" role="menuitem">Videos</a>
           </div>
-        </div>
-
-        <button class="tab-btn" data-tab="videos">Videos</button>
-        <button class="tab-btn" data-tab="contact">Contact</button>
-      </div>
+        </li>
+        <li>
+          <button type="button" aria-haspopup="true" aria-expanded="false">Services</button>
+          <div class="dropdown" role="menu">
+            <a href="#svc-mc" role="menuitem">MC / Host</a>
+            <a href="#svc-dhol" role="menuitem">Dhol &amp; Drums</a>
+            <a href="#svc-content" role="menuitem">Content Creation</a>
+          </div>
+        </li>
+        <li>
+          <button type="button" aria-haspopup="true" aria-expanded="false">Pricing</button>
+          <div class="dropdown" role="menu">
+            <a href="#pricing-info" role="menuitem">Packages / Note</a>
+            <a href="mailto:Punjabiweddingmc@gmail.com?subject=Booking%20Inquiry%20-%20Punjabi%20Wedding%20MC" role="menuitem">Book Now</a>
+          </div>
+        </li>
+        <li>
+          <button type="button" aria-haspopup="true" aria-expanded="false">Contact Us</button>
+          <div class="dropdown" role="menu">
+            <a href="mailto:Punjabiweddingmc@gmail.com" role="menuitem">Email</a>
+            <a href="tel:+14402665763" role="menuitem">Phone</a>
+            <a href="https://instagram.com/punjabiweddingmc" target="_blank" rel="noopener" role="menuitem">Instagram</a>
+          </div>
+        </li>
+      </ul>
     </nav>
   </header>
 
-  <!-- ===== CONTENT ===== -->
-  <main>
-    <!-- HOME -->
-    <section id="home" class="tab-panel active">
-      <h2 class="section-title">Welcome</h2>
-      <p class="section-subtitle">High-energy hosting and dhol that turns moments into memories.</p>
-      <div class="grid3">
-        <div class="card"><h3 style="margin:0 0 8px">What I Do</h3><p style="margin:0;color:var(--muted)">Reception MC, Baraat hype, dhol sets, sangeet curation, and celebrity events.</p></div>
-        <div class="card"><h3 style="margin:0 0 8px">Where I Work</h3><p style="margin:0;color:var(--muted)">Seattle & the Pacific Northwest — available for travel nationwide.</p></div>
-        <div class="card"><h3 style="margin:0 0 8px">Book Me</h3><p style="margin:0;color:var(--muted)">DM @PunjabiWeddingMC or email below for dates & packages.</p></div>
+  <!-- HERO -->
+  <div id="home" class="wrap">
+    <img src="Logo.png" alt="Punjabi Wedding MC Logo" class="logo" />
+    <h1 class="welcome">Welcome to</h1>
+    <h2 class="brand">Punjabi Wedding MC</h2>
+    <a class="btn" href="mailto:Punjabiweddingmc@gmail.com?subject=Booking%20Inquiry%20-%20Punjabi%20Wedding%20MC">Book Now</a>
+
+    <p class="bio">
+      I’m <strong>Arrjun Singh</strong>, one of the top entertainers in the Pacific Northwest and across the United States, known for turning every celebration into an unforgettable experience.
+      My passion for performance has taken me to international destinations including <strong>Mexico, Sri Lanka, Canada, and India</strong>, where I’ve brought energy, culture, and joy to weddings and special events.
+      <br><br>
+      Beyond the stage, I’m a <strong>singer-songwriter</strong> with over <strong>20 singles</strong> on Apple Music and Spotify, as well as one album and one EP.
+      I’m also the host of the <strong>Growing with Arrjun</strong> audio-video podcast on YouTube and Spotify, where I share stories and insights to inspire others.
+      <br><br>
+      Whether it’s MC’ing your big day, playing the dhol, creating captivating content, or simply making every moment memorable,
+      my mission is to make your event <strong>bigger, better, and truly unforgettable</strong>.
+    </p>
+  </div>
+
+  <!-- HOME → PHOTOS (with tabs) -->
+  <section id="photos" aria-labelledby="photos-title">
+    <div class="wrap">
+      <h2 id="photos-title">Photos</h2>
+      <p>Highlights from receptions, baraats, and sangeets.</p>
+
+      <!-- Tabs -->
+      <div class="tabs" role="tablist" aria-label="Photo categories">
+        <button class="tab-btn" role="tab" aria-selected="true" aria-controls="tab-highlights" id="tab-highlights-btn">Highlights</button>
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-stars" id="tab-stars-btn">Shining With The Stars</button>
       </div>
-    </section>
 
-    <!-- PHOTOS -->
-    <section id="photos" class="tab-panel">
-      <h2 class="section-title">Photos</h2>
-      <p class="section-subtitle">Highlights from receptions, baraats, and sangeets.</p>
-
-      <div class="subtabs" role="tablist" aria-label="Photo sections">
-        <button class="subtab-btn active" data-subtab="highlights" role="tab" aria-selected="true">Highlights</button>
-        <button class="subtab-btn" data-subtab="stars" role="tab" aria-selected="false">Shining With The Stars</button>
-      </div>
-
-      <!-- HIGHLIGHTS (your 5) -->
-      <div id="highlights" class="subpanel active" role="tabpanel" aria-label="Highlights gallery">
-        <h3 class="sr-only">Highlights</h3>
-        <div class="hlx-row">
-          <div class="hlx-card"><img src="assets/photos/highlights/highlight-1.JPG" alt="Jazzy B"><div class="hlx-cap">Jazzy B</div></div>
-          <div class="hlx-card"><img src="assets/photos/highlights/highlight-2.jpg" alt="Garry Sandhu"><div class="hlx-cap">Garry Sandhu</div></div>
-          <div class="hlx-card"><img src="assets/photos/highlights/highlight-3.jpg" alt="Raghav"><div class="hlx-cap">Raghav</div></div>
-          <div class="hlx-card"><img src="assets/photos/highlights/highlight-4.JPG" alt="Babbu"><div class="hlx-cap">Babbu</div></div>
-          <div class="hlx-card"><img src="assets/photos/highlights/highlight-5.jpg" alt="Surjit Khan"><div class="hlx-cap">Surjit Khan</div></div>
+      <!-- Tab: Highlights (your existing placeholders) -->
+      <div id="tab-highlights" class="tab-pane active" role="tabpanel" aria-labelledby="tab-highlights-btn">
+        <div class="gallery">
+          <div class="ph">Add Photo 1</div>
+          <div class="ph">Add Photo 2</div>
+          <div class="ph">Add Photo 3</div>
+          <div class="ph">Add Photo 4</div>
         </div>
       </div>
 
-      <!-- STARS (7 grid) -->
-      <div id="stars" class="subpanel" role="tabpanel" aria-label="Shining With The Stars gallery">
-        <h3 class="sr-only">Shining With The Stars</h3>
-        <div class="grid">
-          <figure class="card"><img src="assets/photos/stars/stars-1.jpg" alt="Jazzy B"><figcaption class="cap">Jazzy B</figcaption></figure>
-          <figure class="card"><img src="assets/photos/stars/stars-2.jpg" alt="Garry Sandhu"><figcaption class="cap">Garry Sandhu</figcaption></figure>
-          <figure class="card"><img src="assets/photos/stars/stars-3.jpg" alt="Raghav"><figcaption class="cap">Raghav</figcaption></figure>
-          <figure class="card"><img src="assets/photos/stars/stars-4.jpg" alt="Babbu"><figcaption class="cap">Babbu</figcaption></figure>
-          <figure class="card"><img src="assets/photos/stars/stars-5.jpg" alt="Surjit Khan"><figcaption class="cap">Surjit Khan</figcaption></figure>
-          <figure class="card"><img src="assets/photos/stars/stars-6.jpg" alt="DJ Goddess"><figcaption class="cap">DJ Goddess</figcaption></figure>
-          <figure class="card"><img src="assets/photos/stars/stars-7.jpg" alt="DJ Hans"><figcaption class="cap">DJ Hans</figcaption></figure>
+      <!-- Tab: Shining With The Stars (grid gallery) -->
+      <div id="tab-stars" class="tab-pane" role="tabpanel" aria-labelledby="tab-stars-btn">
+        <div class="stars-grid">
+          <figure><img src="stars1.jpg" alt="Arrjun Singh with Jazzy B"><figcaption>With JAZZY B</figcaption></figure>
+          <figure><img src="stars2.jpg" alt="Arrjun Singh with Garry Sandhu"><figcaption>With GARRY SANDHU</figcaption></figure>
+          <figure><img src="stars3.jpg" alt="Arrjun Singh with Raghav"><figcaption>With RAGHAV</figcaption></figure>
+          <figure><img src="stars4.jpg" alt="Arrjun Singh with Babbu"><figcaption>With BABBU</figcaption></figure>
+          <figure><img src="stars5.jpg" alt="Arrjun Singh with Surjit Khan"><figcaption>With SURJIT KHAN</figcaption></figure>
+          <figure><img src="stars6.jpg" alt="Arrjun Singh with DJ Goddess"><figcaption>With DJ GODDESS</figcaption></figure>
+          <figure><img src="stars7.jpg" alt="Arrjun Singh with DJ Hans"><figcaption>With DJ HANS</figcaption></figure>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- VIDEOS -->
-    <section id="videos" class="tab-panel">
-      <h2 class="section-title">Videos</h2>
-      <p class="section-subtitle">Performance clips and event recaps coming soon.</p>
-      <div class="card" style="text-align:center;color:var(--muted)">Embed your YouTube or Instagram Reels here.</div>
-    </section>
+    <!-- Lightbox for Stars images -->
+    <div id="lb" class="lb-backdrop" aria-modal="true" role="dialog" aria-label="Image preview">
+      <img id="lbImg" alt="">
+    </div>
+  </section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="tab-panel">
-      <h2 class="section-title">Contact</h2>
-      <p class="section-subtitle">Bookings & inquiries</p>
-      <div class="grid3">
-        <div class="card"><h3 style="margin:0 0 8px">Email</h3><p style="margin:0;color:var(--muted)">arrjunworldwide [at] gmail [dot] com</p></div>
-        <div class="card"><h3 style="margin:0 0 8px">Instagram</h3><p style="margin:0;color:var(--muted)">@PunjabiWeddingMC</p></div>
-        <div class="card"><h3 style="margin:0 0 8px">Location</h3><p style="margin:0;color:var(--muted)">Seattle, WA — Available worldwide</p></div>
+  <!-- HOME → VIDEOS -->
+  <section id="videos" aria-labelledby="videos-title">
+    <div class="wrap">
+      <h2 id="videos-title">Videos</h2>
+      <p>Recent reels and highlights.</p>
+
+      <div class="insta-grid">
+        <!-- Reel 1 -->
+        <blockquote class="instagram-media insta-embed" data-instgrm-permalink="https://www.instagram.com/reel/DKvgFxIx5LK/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:12px;"></blockquote>
+        <!-- Reel 2 -->
+        <blockquote class="instagram-media insta-embed" data-instgrm-permalink="https://www.instagram.com/reel/DMDiCf3JODq/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:12px;"></blockquote>
+        <!-- Reel 3 -->
+        <blockquote class="instagram-media insta-embed" data-instgrm-permalink="https://www.instagram.com/reel/DKIUjLnhTfG/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:12px;"></blockquote>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
-  <footer style="text-align:center;padding:26px 16px;border-top:2px solid var(--maroon);color:var(--maroon-dark);font-weight:700">
-    © <span id="year"></span> Punjabi Wedding MC
-  </footer>
+  <!-- SERVICES -->
+  <section id="services" aria-labelledby="services-title">
+    <div class="wrap">
+      <h2 id="services-title">Services</h2>
+      <div class="cards">
+        <div id="svc-mc" class="card">
+          <h3>MC / Host</h3>
+          <p>High-energy hosting, crowd engagement, bilingual announcements, and seamless flow for your event.</p>
+        </div>
+        <div id="svc-dhol" class="card">
+          <h3>Dhol &amp; Drums</h3>
+          <p>Traditional dhol with modern rhythms to power baraats, entrances, and dance floors.</p>
+        </div>
+        <div id="svc-content" class="card">
+          <h3>Content Creation</h3>
+          <p>Reels, highlights, and social-ready clips — captured and edited for shareability.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- ===== JS ===== -->
-  <script>
-    // Splash
-    const splash=document.getElementById('splash');
-    document.getElementById('enterBtn').addEventListener('click',()=>{ splash.classList.add('hide'); setTimeout(()=>splash.remove(),360); });
+  <!-- PRICING -->
+  <section id="pricing" aria-labelledby="pricing-title">
+    <div class="wrap">
+      <h2 id="pricing-title">Pricing</h2>
+      <div id="pricing-info" class="note">
+        We cater to you according to your needs, making sure you are satisfied.
+        Please email us your <strong>dates</strong>, <strong>location</strong>, <strong>timing</strong>, and the <strong>services</strong> you need.
+        We will get back to you within <strong>48 hours</strong>.
+      </div>
+      <a class="btn" href="mailto:Punjabiweddingmc@gmail.com?subject=Booking%20Inquiry%20-%20Punjabi%20Wedding%20MC">Book Now</a>
+    </div>
+  </section>
 
-    // Year
-    document.getElementById('year').textContent=new Date().getFullYear();
+  <!-- CONTACT -->
+  <section id="contact" aria-labelledby="contact-title">
+    <div class="wrap">
+      <h2 id="contact-title">Contact Us</h2>
+      <div class="contact">
+        <p><strong>Email:</strong> <a href="mailto:Punjabiweddingmc@gmail.com">Punjabiweddingmc@gmail.com</a></p>
+        <p><strong>Phone:</strong> <a href="tel:+14402665763">440-266-5763</a></p>
+        <p><strong>Instagram:</strong> <a href="https://instagram.com/punjabiweddingmc" target="_blank" rel="noopener">@punjabiweddingmc</a></p>
+      </div>
+    </div>
+  </section>
 
-    // Dropdown
-    const dropdown=document.querySelector('.dropdown');
-    const photosBtn=dropdown.querySelector('[data-tab="photos"]');
-    photosBtn.addEventListener('click',(e)=>{
-      e.stopPropagation();
-      dropdown.classList.toggle('open');
-      photosBtn.setAttribute('aria-expanded', dropdown.classList.contains('open'));
-      activateTab('photos');
-    });
-    document.addEventListener('click',()=>dropdown.classList.remove('open'));
+  <!-- Founder badge -->
+  <div class="profile" aria-label="Founder">
+    <img src="founder.jpg" alt="Arrjun Singh" />
+    <div>
+      <p class="name">ARRJUN SINGH</p>
+      <p class="title">CEO, Founder</p>
+    </div>
+  </div>
+</div>
 
-    // Top tabs
-    const tabBtns=document.querySelectorAll('.tab-btn');
-    const panels=document.querySelectorAll('.tab-panel');
-    tabBtns.forEach(b=>{
-      b.addEventListener('click',()=>{
-        const id=b.dataset.tab; if(!id) return;
-        activateTab(id);
+<script>
+  (function(){
+    // ===== Splash audio & transition
+    const splash = document.getElementById('splash');
+    const enterBtn = document.getElementById('enterBtn');
+    const audio = document.getElementById('splashAudio');
+    function startAudio(){
+      audio.loop = true;
+      audio.volume = 1;
+      audio.play().catch(()=> {
+        // Mobile autoplay fallback
+        const kick = () => { audio.play().catch(()=>{}); cleanup(); };
+        const cleanup = () => {
+          document.removeEventListener('touchstart', kick);
+          document.removeEventListener('click', kick);
+        };
+        document.addEventListener('touchstart', kick, {once:true});
+        document.addEventListener('click', kick, {once:true});
       });
-    });
-    function activateTab(id){
-      tabBtns.forEach(x=>x.classList.toggle('active', x.dataset.tab===id));
-      panels.forEach(p=>p.classList.toggle('active', p.id===id));
+    }
+    window.addEventListener('load', startAudio);
+
+    function fadeOutAudio(ms=700){
+      if (audio.paused) return;
+      const steps = 14, stepTime = Math.max(20, Math.floor(ms/steps));
+      let i = 0;
+      const iv = setInterval(()=>{
+        i++; audio.volume = Math.max(0, 1 - i/steps);
+        if (i>=steps){ clearInterval(iv); audio.pause(); audio.volume = 1; }
+      }, stepTime);
     }
 
-    // Photo subtabs
-    const subBtns=document.querySelectorAll('.subtab-btn');
-    const subPanels=document.querySelectorAll('.subpanel');
-    subBtns.forEach(b=>{
-      b.addEventListener('click',()=>{
-        const id=b.dataset.subtab;
-        subBtns.forEach(x=>x.classList.toggle('active', x.dataset.subtab===id));
-        subPanels.forEach(p=>p.classList.toggle('active', p.id===id));
-      });
-    });
+    function enterSite(e){
+      if (e) e.stopPropagation();
+      splash.classList.add('hidden');
+      fadeOutAudio(700);
+      document.body.classList.add('reveal');
+      setTimeout(()=>{ splash.style.display='none'; }, 800);
+    }
+    enterBtn.addEventListener('click', enterSite);
+    splash.addEventListener('click', (e)=>{ if (e.target!==enterBtn) enterSite(e); });
 
-    // Submenu links switch subtabs
-    document.querySelectorAll('.subnav-link').forEach(a=>{
-      a.addEventListener('click',(e)=>{
-        e.preventDefault();
-        const id=a.dataset.subtab;
-        activateTab('photos');
-        subBtns.forEach(x=>x.classList.toggle('active', x.dataset.subtab===id));
-        subPanels.forEach(p=>p.classList.toggle('active', p.id===id));
-        dropdown.classList.remove('open');
+    // ===== Mobile-friendly dropdowns
+    const menu = document.getElementById('menu');
+    const items = Array.from(menu.querySelectorAll(':scope > li'));
+    function closeAll(except=null){
+      items.forEach(li=>{
+        if (li!==except){ li.classList.remove('open'); const b=li.querySelector('button'); if(b) b.setAttribute('aria-expanded','false'); }
+      });
+    }
+    items.forEach(li=>{
+      const btn = li.querySelector('button');
+      if(!btn) return;
+      btn.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        const isOpen = li.classList.contains('open');
+        closeAll();
+        if(!isOpen){ li.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
       });
     });
-  </script>
+    document.addEventListener('click', ()=>closeAll());
+    document.addEventListener('scroll', ()=>closeAll(), {passive:true});
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeAll(); });
+
+    // ===== Photos tabs
+    const btnHighlights = document.getElementById('tab-highlights-btn');
+    const btnStars = document.getElementById('tab-stars-btn');
+    const paneHighlights = document.getElementById('tab-highlights');
+    const paneStars = document.getElementById('tab-stars');
+    function show(tab){
+      const isStars = tab === 'stars';
+      btnHighlights.setAttribute('aria-selected', String(!isStars));
+      btnStars.setAttribute('aria-selected', String(isStars));
+      paneHighlights.classList.toggle('active', !isStars);
+      paneStars.classList.toggle('active', isStars);
+    }
+    btnHighlights.addEventListener('click', ()=>show('highlights'));
+    btnStars.addEventListener('click', ()=>show('stars'));
+
+    // ===== Lightbox for Stars images
+    const lb = document.getElementById('lb');
+    const lbImg = document.getElementById('lbImg');
+    document.querySelectorAll('#tab-stars .stars-grid img').forEach(img=>{
+      img.addEventListener('click', ()=>{ lbImg.src = img.src; lb.classList.add('show'); });
+    });
+    const closeLB = ()=> lb.classList.remove('show');
+    lb.addEventListener('click', (e)=>{ if(e.target===lb || e.target===lbImg) closeLB(); });
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeLB(); });
+  })();
+</script>
+
+<!-- Instagram embed script (for Videos tab) -->
+<script async src="https://www.instagram.com/embed.js"></script>
+
 </body>
 </html>
